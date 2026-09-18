@@ -184,7 +184,7 @@ nav {
   overflow: hidden;
   padding: 0.85rem 0;
 }
-.marquee-track { display: flex; white-space: nowrap; animation: marquee 26s linear infinite; }
+.marquee-track { display: flex; white-space: nowrap; will-change: transform; }
 .marquee-item {
   display: inline-flex; align-items: center; gap: 1.25rem;
   padding: 0 1.75rem;
@@ -308,8 +308,42 @@ footer a { color: rgba(255,255,255,0.55); text-decoration: none; font-size: 0.82
 footer a:hover { color: var(--gold); }
 
 /* REVEAL */
-.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s cubic-bezier(.2,.8,.2,1), transform 0.7s cubic-bezier(.2,.8,.2,1); }
-.reveal.in { opacity: 1; transform: translateY(0); }
+.reveal {
+  opacity: 0;
+  transform: perspective(900px) rotateX(10deg) translateY(28px);
+  transform-origin: center bottom;
+  transition: opacity 0.8s cubic-bezier(.2,.8,.2,1), transform 0.8s cubic-bezier(.2,.8,.2,1);
+}
+.reveal.in { opacity: 1; transform: perspective(900px) rotateX(0deg) translateY(0); }
+.reveal.reveal-left { transform: perspective(900px) translateX(-50px) rotateY(10deg); }
+.reveal.reveal-left.in { transform: perspective(900px) translateX(0) rotateY(0); }
+.reveal.reveal-right { transform: perspective(900px) translateX(50px) rotateY(-10deg); }
+.reveal.reveal-right.in { transform: perspective(900px) translateX(0) rotateY(0); }
+
+/* CUSTOM CURSOR */
+#cursor-glow {
+  position: fixed; top: 0; left: 0; width: 34px; height: 34px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(249,200,70,0.55), rgba(249,200,70,0) 70%);
+  filter: blur(4px);
+  pointer-events: none; z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width 0.35s cubic-bezier(.2,.8,.2,1), height 0.35s cubic-bezier(.2,.8,.2,1), background 0.35s, filter 0.35s;
+  mix-blend-mode: normal;
+}
+#cursor-glow.hovering {
+  width: 64px; height: 64px;
+  background: radial-gradient(circle, rgba(58,27,94,0.35), rgba(249,200,70,0.25) 55%, transparent 75%);
+  filter: blur(6px);
+}
+#cursor-dot {
+  position: fixed; top: 0; left: 0; width: 7px; height: 7px; border-radius: 50%;
+  background: var(--purple);
+  pointer-events: none; z-index: 10000;
+  transform: translate(-50%, -50%);
+  transition: transform 0.15s, background 0.25s;
+}
+#cursor-dot.hovering { background: var(--gold); transform: translate(-50%, -50%) scale(0.4); }
+body.custom-cursor, body.custom-cursor a, body.custom-cursor button { cursor: none; }
 
 /* RESPONSIVE */
 @media (max-width: 900px) {
@@ -330,6 +364,9 @@ footer a:hover { color: var(--gold); }
 </style>
 </head>
 <body>
+
+<div id="cursor-glow"></div>
+<div id="cursor-dot"></div>
 
 <!-- NAV -->
 <nav>
@@ -437,13 +474,13 @@ footer a:hover { color: var(--gold); }
     <div class="section-rule"></div>
   </div>
   <div class="about-grid">
-    <div class="about-body reveal">
+    <div class="about-body reveal reveal-left">
       <h2 class="about-headline">Support operations as a <span>strategic asset</span></h2>
       <p>I specialise in transforming support from a reactive cost centre into a proactive customer experience engine. My work spans Zendesk migrations, AI-driven automation, quality governance, and cross-functional alignment — connecting Support with Product, Engineering, and Marketing to drive outcomes that genuinely matter.</p>
       <p>I'm known for reducing friction at scale: building workflows that hold up under pressure, translating raw ticket data into structured insights that influence product direction, and designing quality systems that make great support repeatable — not accidental.</p>
       <p>Whether architecting a knowledge governance framework, leading a team of 18, or running a full Zendesk migration from scratch, I operate with the same principle: quality at scale is a design problem.</p>
     </div>
-    <div class="about-details reveal">
+    <div class="about-details reveal reveal-right">
       <div class="detail-row"><span class="detail-key">Current role</span><span class="detail-val">CX &amp; Quality Lead, WP Media</span></div>
       <div class="detail-row"><span class="detail-key">Location</span><span class="detail-val">Athens, Greece</span></div>
       <div class="detail-row"><span class="detail-key">Industry</span><span class="detail-val">SaaS · WordPress ecosystem</span></div>
@@ -550,7 +587,7 @@ footer a:hover { color: var(--gold); }
     <div class="section-rule"></div>
   </div>
   <div class="skills-grid">
-    <div class="reveal">
+    <div class="reveal reveal-left">
       <p class="skills-col-title">Core Competencies</p>
       <div class="skills-tags">
         <span class="skill-tag">Customer Experience Strategy</span>
@@ -570,7 +607,7 @@ footer a:hover { color: var(--gold); }
         <span class="skill-tag">Quality Governance</span>
       </div>
     </div>
-    <div class="reveal">
+    <div class="reveal reveal-right">
       <p class="skills-col-title">Tools &amp; Platforms</p>
       <div class="tools-list">
         <div class="tool-row">Zendesk <span class="tool-dot"></span></div>
@@ -595,11 +632,11 @@ footer a:hover { color: var(--gold); }
     <div class="section-rule"></div>
   </div>
   <div class="contact-split">
-    <div class="reveal">
+    <div class="reveal reveal-left">
       <h2 class="contact-headline">Let's build something <span>worth experiencing.</span></h2>
       <p class="contact-sub">Open to conversations about senior CX, support operations, or quality leadership roles. Always happy to connect.</p>
     </div>
-    <div class="contact-actions reveal">
+    <div class="contact-actions reveal reveal-right">
       <a href="mailto:mindanticipation@gmail.com" class="contact-link">
         <div class="contact-link-icon">✉</div>
         <div>
@@ -636,9 +673,13 @@ footer a:hover { color: var(--gold); }
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
-  // Scroll reveal
+  // Scroll reveal — replays both ways: elements animate in when scrolled into view,
+  // and reverse back out when scrolled past (up or down), instead of a one-time reveal.
   const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('in');
+      else e.target.classList.remove('in');
+    });
   }, { threshold: 0.08 });
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
@@ -662,39 +703,46 @@ footer a:hover { color: var(--gold); }
     const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+    const CAMERA_Z = 5.5;
+    camera.position.z = CAMERA_Z;
 
-    // Base world-space offsets for the two shapes at a "normal" (landscape) aspect ratio
-    const shapeBaseX = 2.2, shapeBaseY = 0.2;
+    // Base world-space offsets for the two shapes (before aspect-based clamping)
+    const shapeBaseX = 2.0, shapeBaseY = 0.2;
     const shape2BaseX = -1.6, shape2BaseY = -1.1;
+
+    function visibleWidthAtZ(z) {
+      const vFOV = camera.fov * Math.PI / 180;
+      const h = 2 * Math.tan(vFOV / 2) * Math.abs(CAMERA_Z - z);
+      return h * camera.aspect;
+    }
 
     function size() {
       const w = heroDark.clientWidth, h = heroDark.clientHeight;
       renderer.setSize(w, h, false);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      const aspect = w / h;
-      camera.aspect = aspect;
-      // PerspectiveCamera fov is vertical, so on narrow/tall (portrait) viewports the
-      // horizontal field of view shrinks a lot and pushes off-center shapes out of frame.
-      // Pull the camera back and pull the shapes toward center as aspect narrows.
-      const narrowness = Math.min(aspect, 1); // 1 = landscape/square, ->0 = very narrow
-      camera.position.z = 6 / Math.max(narrowness, 0.42);
-      shape.position.x = shapeBaseX * narrowness;
-      shape.position.y = shapeBaseY;
-      shape2.position.x = shape2BaseX * narrowness;
-      shape2.position.y = shape2BaseY;
+      camera.aspect = w / (h || 1);
       camera.updateProjectionMatrix();
+      // Clamp each shape's x-offset to a safe fraction of what's actually visible at its
+      // depth, so it stays framed regardless of how narrow/wide this column ends up being
+      // (this column is often close to square or even portrait, not just full-page width).
+      const vw0 = visibleWidthAtZ(shape.position.z || 0);
+      const vw1 = visibleWidthAtZ(shape2.position.z);
+      shape.position.x = Math.sign(shapeBaseX) * Math.min(Math.abs(shapeBaseX), vw0 * 0.3);
+      shape2.position.x = Math.sign(shape2BaseX) * Math.min(Math.abs(shape2BaseX), vw1 * 0.28);
     }
 
-    const geo = new THREE.IcosahedronGeometry(2.1, 1);
+    const geo = new THREE.IcosahedronGeometry(2.3, 1);
     const wire = new THREE.WireframeGeometry(geo);
-    const mat = new THREE.LineBasicMaterial({ color: 0xF9C846, transparent: true, opacity: 0.55 });
+    const mat = new THREE.LineBasicMaterial({ color: 0xF9C846, transparent: true, opacity: 0.7 });
     const shape = new THREE.LineSegments(wire, mat);
+    shape.position.y = shapeBaseY;
     scene.add(shape);
 
-    const geo2 = new THREE.IcosahedronGeometry(0.9, 0);
+    const geo2 = new THREE.IcosahedronGeometry(0.95, 0);
     const wire2 = new THREE.WireframeGeometry(geo2);
-    const mat2 = new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.18 });
+    const mat2 = new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.28 });
     const shape2 = new THREE.LineSegments(wire2, mat2);
+    shape2.position.y = shape2BaseY;
     shape2.position.z = -1;
     scene.add(shape2);
 
@@ -723,14 +771,74 @@ footer a:hover { color: var(--gold); }
       requestAnimationFrame(animate);
       if (!visible) return;
       currentScroll += (targetScroll - currentScroll) * 0.08;
-      shape.rotation.x = currentScroll * Math.PI * 1.4 + my * 0.3;
-      shape.rotation.y = currentScroll * Math.PI * 2 + mx * 0.4;
+      const t = performance.now() * 0.0002;
+      shape.rotation.x = currentScroll * Math.PI * 1.4 + my * 0.3 + t;
+      shape.rotation.y = currentScroll * Math.PI * 2 + mx * 0.4 + t * 1.4;
+      shape.scale.setScalar(1 + currentScroll * 0.15);
       shape2.rotation.x -= 0.004;
       shape2.rotation.y += 0.006;
-      shape2.position.y = -1.1 + currentScroll * 0.6;
+      shape2.position.y = shape2BaseY + currentScroll * 0.6;
       renderer.render(scene, camera);
     }
     animate();
+  })();
+
+  // Subtle 3D tilt on the profile photo, driven by scroll progress through the hero
+  (function () {
+    const photo = document.querySelector('.hero-photo');
+    const heroDark = document.querySelector('.hero-dark');
+    if (!photo || !heroDark) return;
+    window.addEventListener('scroll', () => {
+      const rect = heroDark.getBoundingClientRect();
+      const progress = Math.min(Math.max(-rect.top / (rect.height || 1), 0), 1);
+      photo.style.transform = `perspective(600px) rotateY(${progress * 14}deg) rotateX(${progress * -6}deg)`;
+    }, { passive: true });
+  })();
+  // Scroll-linked horizontal marquee: idle drift plus a boost tied to scroll velocity/direction
+  (function () {
+    const track = document.querySelector('.marquee-track');
+    if (!track) return;
+    let shift = 0;
+    let lastY = window.scrollY;
+    function loop() {
+      requestAnimationFrame(loop);
+      const currentY = window.scrollY;
+      const delta = currentY - lastY;
+      lastY = currentY;
+      shift += 0.4 + delta * 1.1; // constant idle drift + scroll-direction boost
+      const half = track.scrollWidth / 2 || 1;
+      const x = -(((shift % half) + half) % half);
+      track.style.transform = `translateX(${x}px)`;
+    }
+    loop();
+  })();
+
+  // Interactive cursor: soft blurred glow that trails the pointer and reacts to hoverables
+  (function () {
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    document.body.classList.add('custom-cursor');
+    const dot = document.getElementById('cursor-dot');
+    const glow = document.getElementById('cursor-glow');
+    let mx = window.innerWidth / 2, my = window.innerHeight / 2;
+    let gx = mx, gy = my;
+    window.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      dot.style.left = mx + 'px';
+      dot.style.top = my + 'px';
+    });
+    function loop() {
+      requestAnimationFrame(loop);
+      gx += (mx - gx) * 0.16;
+      gy += (my - gy) * 0.16;
+      glow.style.left = gx + 'px';
+      glow.style.top = gy + 'px';
+    }
+    loop();
+    const hoverables = document.querySelectorAll('a, button, .metric-card, .contact-link, .skill-tag, .tool-row, .btn-pill');
+    hoverables.forEach(el => {
+      el.addEventListener('mouseenter', () => { dot.classList.add('hovering'); glow.classList.add('hovering'); });
+      el.addEventListener('mouseleave', () => { dot.classList.remove('hovering'); glow.classList.remove('hovering'); });
+    });
   })();
 </script>
 </body>
