@@ -1,845 +1,299 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" class="no-js">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>George Stathopoulos — Customer Experience & Quality Lead</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root {
-  --purple: #3A1B5E;
-  --purple-dark: #26123E;
-  --navy: #1B1E2B;
-  --gold: #F9C846;
-  --gold-dark: #E0AC2A;
-  --paper: #FFFFFF;
-  --paper-tint: #F6F3FB;
-  --ink: #1A1A1A;
-  --ink-60: rgba(26,26,26,0.62);
-  --ink-40: rgba(26,26,26,0.4);
-  --ink-12: rgba(26,26,26,0.1);
-  --rule: rgba(26,26,26,0.1);
-  --display: 'Poppins', sans-serif;
-  --sans: 'Inter', sans-serif;
-}
-html { scroll-behavior: smooth; font-size: 16px; }
-body {
-  font-family: var(--sans);
-  background: var(--paper);
-  color: var(--ink);
-  -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
-}
-
-/* NAV */
-nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 500;
-  padding: 1.1rem 3rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: rgba(255,255,255,0.85);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--ink-12);
-  transition: background 0.3s;
-}
-.nav-logo {
-  font-family: var(--display);
-  font-weight: 700;
-  font-size: 1.05rem;
-  color: var(--purple);
-  text-decoration: none;
-}
-.nav-links { display: flex; gap: 2rem; list-style: none; }
-.nav-links a {
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: var(--ink-60);
-  text-decoration: none;
-  transition: color 0.25s;
-}
-.nav-links a:hover { color: var(--purple); }
-.btn-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
-  border-radius: 999px;
-  font-family: var(--display);
-  font-weight: 600;
-  font-size: 0.8rem;
-  text-decoration: none;
-  transition: transform 0.25s, box-shadow 0.25s, background 0.25s;
-}
-.btn-gold { background: var(--gold); color: var(--purple-dark); }
-.btn-gold:hover { background: var(--gold-dark); transform: translateY(-2px); }
-.btn-outline-dark { border: 2px solid rgba(255,255,255,0.35); color: #fff; }
-.btn-outline-dark:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
-.btn-outline-light { border: 2px solid var(--ink-12); color: var(--ink); }
-.btn-outline-light:hover { border-color: var(--purple); color: var(--purple); transform: translateY(-2px); }
-.btn-nav-cv { background: var(--purple); color: #fff; padding: 0.6rem 1.3rem; font-size: 0.75rem; }
-.btn-nav-cv:hover { background: var(--purple-dark); transform: translateY(-1px); }
-
-/* HERO */
-.hero {
-  min-height: 100vh;
-  display: grid;
-  grid-template-columns: 1.15fr 1fr;
-  position: relative;
-  overflow: hidden;
-}
-.hero-dark {
-  position: relative;
-  background: linear-gradient(155deg, var(--purple) 0%, var(--purple-dark) 55%, var(--navy) 100%);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 8rem 3rem 4rem;
-  overflow: hidden;
-}
-#hero-canvas {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  opacity: 0.85;
-  pointer-events: none;
-}
-.hero-dark-content { position: relative; z-index: 2; }
-.hero-photo-row { display: flex; align-items: center; gap: 1.75rem; margin-bottom: 2rem; flex-wrap: wrap; }
-.hero-photo {
-  width: 128px; height: 128px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 4px solid var(--gold);
-  box-shadow: 0 8px 28px rgba(0,0,0,0.35);
-  flex-shrink: 0;
-}
-.hero-name {
-  font-family: var(--display);
-  font-size: clamp(2rem, 3.4vw, 2.7rem);
-  font-weight: 700;
-  color: #fff;
-  line-height: 1.15;
-}
-.hero-tag {
-  font-family: var(--display);
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--gold);
-  margin-top: 0.5rem;
-}
-.hero-location {
-  font-size: 0.85rem;
-  color: rgba(255,255,255,0.55);
-  margin-top: 0.4rem;
-}
-.hero-ctas { display: flex; gap: 0.9rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
-.hero-chips { display: flex; gap: 0.85rem; flex-wrap: wrap; }
-.hero-chip {
-  flex: 1; min-width: 120px;
-  border-radius: 14px;
-  padding: 1rem 1.1rem;
-  text-align: left;
-}
-.hero-chip.gold { background: var(--gold); color: var(--purple-dark); }
-.hero-chip.navy { background: rgba(255,255,255,0.08); color: #fff; border: 1px solid rgba(255,255,255,0.14); }
-.hero-chip-num { font-family: var(--display); font-weight: 700; font-size: 1.4rem; }
-.hero-chip-label { font-size: 0.72rem; margin-top: 0.2rem; opacity: 0.85; }
-
-.hero-light {
-  background: var(--paper);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 8rem 3.5rem 4rem;
-}
-.hero-summary-label {
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--purple);
-  margin-bottom: 1rem;
-}
-.hero-summary {
-  font-family: var(--display);
-  font-size: clamp(1.3rem, 1.9vw, 1.55rem);
-  font-weight: 500;
-  line-height: 1.5;
-  color: var(--ink);
-  margin-bottom: 2.5rem;
-}
-.hero-summary strong { color: var(--purple); font-weight: 700; }
-.hero-light-ctas { display: flex; gap: 0.9rem; flex-wrap: wrap; }
-
-/* MARQUEE */
-.marquee-strip {
-  background: var(--navy);
-  overflow: hidden;
-  padding: 0.85rem 0;
-}
-.marquee-track { display: flex; white-space: nowrap; will-change: transform; }
-.marquee-item {
-  display: inline-flex; align-items: center; gap: 1.25rem;
-  padding: 0 1.75rem;
-  font-family: var(--display);
-  font-size: 0.72rem; font-weight: 600;
-  letter-spacing: 0.06em; text-transform: uppercase;
-  color: rgba(255,255,255,0.55);
-}
-.marquee-dot { width: 4px; height: 4px; background: var(--gold); border-radius: 50%; flex-shrink: 0; }
-@keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
-
-/* METRICS */
-.metrics {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.25rem;
-  padding: 3.5rem 3rem;
-}
-.metric-card {
-  border-radius: 18px;
-  padding: 1.75rem 1.5rem;
-  transition: transform 0.3s cubic-bezier(.2,.8,.2,1);
-  transform-style: preserve-3d;
-  will-change: transform;
-}
-.metric-card.c-gold { background: var(--gold); color: var(--purple-dark); }
-.metric-card.c-navy { background: var(--navy); color: #fff; }
-.metric-card.c-purple { background: var(--purple); color: #fff; }
-.metric-card.c-white { background: var(--paper-tint); color: var(--ink); border: 1px solid var(--rule); }
-.metric-num { font-family: var(--display); font-size: clamp(2rem, 3vw, 2.6rem); font-weight: 700; line-height: 1; }
-.metric-label { font-size: 0.78rem; margin-top: 0.6rem; opacity: 0.85; max-width: 150px; }
-
-/* SECTION CORE */
-.section { padding: 5.5rem 3rem; }
-.section-header { display: flex; align-items: center; gap: 1.25rem; margin-bottom: 3.5rem; }
-.section-num {
-  font-family: var(--display); font-weight: 700; font-size: 0.85rem;
-  color: #fff; background: var(--purple);
-  width: 32px; height: 32px; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-}
-.section-title { font-family: var(--display); font-size: 0.85rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-60); }
-.section-rule { flex: 1; height: 1px; background: var(--rule); }
-
-/* ABOUT */
-#about { background: var(--paper-tint); }
-.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
-.about-headline { font-family: var(--display); font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 700; line-height: 1.25; margin-bottom: 1.5rem; }
-.about-headline span { color: var(--purple); }
-.about-body p { font-size: 0.98rem; color: var(--ink-60); line-height: 1.8; margin-bottom: 1.2rem; }
-.detail-row { display: grid; grid-template-columns: 1fr 1.3fr; padding: 1.1rem 0; border-bottom: 1px solid var(--rule); }
-.detail-row:first-child { border-top: 1px solid var(--rule); }
-.detail-key { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--purple); }
-.detail-val { font-family: var(--display); font-size: 0.98rem; font-weight: 500; color: var(--ink); line-height: 1.5; }
-
-/* EXPERIENCE */
-#experience { background: var(--paper); }
-.exp-block { display: grid; grid-template-columns: 250px 1fr; gap: 3rem; padding: 3rem 0; border-top: 1px solid var(--rule); }
-.exp-block:last-child { border-bottom: 1px solid var(--rule); }
-.exp-company-name { font-family: var(--display); font-size: 1.35rem; font-weight: 700; color: var(--ink); margin-bottom: 0.4rem; }
-.exp-period-range { font-size: 0.75rem; font-weight: 600; color: var(--purple); margin-bottom: 1rem; }
-.exp-products { display: flex; flex-wrap: wrap; gap: 0.4rem; }
-.product-chip { font-size: 0.7rem; font-weight: 600; padding: 0.3rem 0.75rem; border-radius: 999px; background: var(--paper-tint); color: var(--purple); }
-.exp-roles { display: flex; flex-direction: column; gap: 2.25rem; }
-.exp-role-meta { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.6rem; gap: 1rem; flex-wrap: wrap; }
-.exp-role-name { font-family: var(--display); font-size: 1.15rem; font-weight: 700; color: var(--ink); display: flex; align-items: center; gap: 0.75rem; }
-.badge-now { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; padding: 0.25rem 0.6rem; border-radius: 999px; background: var(--gold); color: var(--purple-dark); }
-.exp-role-dates { font-size: 0.75rem; font-weight: 600; color: var(--ink-40); }
-.exp-role-desc { font-size: 0.92rem; color: var(--ink-60); line-height: 1.75; margin-bottom: 1.1rem; }
-.exp-achievements { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
-.exp-achievements li { display: grid; grid-template-columns: 1.2rem 1fr; gap: 0.5rem; font-size: 0.9rem; color: var(--ink-60); line-height: 1.65; }
-.exp-achievements li::before { content: '→'; color: var(--gold-dark); font-weight: 700; }
-.exp-divider { width: 100%; height: 1px; background: var(--rule); margin: 1.75rem 0; }
-
-/* SKILLS */
-#skills { background: var(--navy); color: #fff; padding: 5.5rem 3rem; }
-#skills .section-title { color: rgba(255,255,255,0.5); }
-#skills .section-num { background: var(--gold); color: var(--purple-dark); }
-#skills .section-rule { background: rgba(255,255,255,0.1); }
-.skills-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 4rem; }
-.skills-col-title { font-family: var(--display); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 1.4rem; }
-.skills-tags { display: flex; flex-wrap: wrap; gap: 0.55rem; }
-.skill-tag { font-size: 0.82rem; font-weight: 500; padding: 0.5rem 1rem; border-radius: 999px; border: 1px solid rgba(255,255,255,0.16); color: rgba(255,255,255,0.75); transition: all 0.25s; cursor: default; }
-.skill-tag:hover { border-color: var(--gold); color: var(--gold); background: rgba(249,200,70,0.08); }
-.tools-list { display: flex; flex-direction: column; }
-.tool-row { display: flex; align-items: center; justify-content: space-between; padding: 0.85rem 0; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 0.92rem; color: rgba(255,255,255,0.7); }
-.tool-row:last-child { border-bottom: none; }
-.tool-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
-
-/* CONTACT */
-#contact { background: var(--paper-tint); }
-.contact-split { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
-.contact-headline { font-family: var(--display); font-size: clamp(2rem, 3.6vw, 3.2rem); font-weight: 700; line-height: 1.15; margin-bottom: 1rem; }
-.contact-headline span { color: var(--purple); }
-.contact-sub { font-size: 0.95rem; color: var(--ink-60); line-height: 1.7; max-width: 380px; }
-.contact-actions { display: flex; flex-direction: column; gap: 0.9rem; }
-.contact-link {
-  display: flex; align-items: center; gap: 1.25rem;
-  padding: 1.15rem 1.4rem; border-radius: 16px;
-  color: var(--ink); text-decoration: none; background: var(--paper);
-  border: 1px solid var(--rule);
-  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
-}
-.contact-link:hover { transform: translateX(6px); box-shadow: 0 10px 26px rgba(58,27,94,0.12); border-color: var(--purple); }
-.contact-link-icon {
-  width: 42px; height: 42px; border-radius: 50%;
-  background: var(--purple); color: var(--gold);
-  display: flex; align-items: center; justify-content: center;
-  font-weight: 700; font-size: 1rem; flex-shrink: 0;
-}
-.contact-link-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--purple); margin-bottom: 0.2rem; }
-.contact-link-value { font-family: var(--display); font-size: 1rem; font-weight: 600; color: var(--ink); }
-.contact-link-arrow { margin-left: auto; color: var(--ink-40); transition: transform 0.25s; }
-.contact-link:hover .contact-link-arrow { transform: translateX(4px); color: var(--purple); }
-
-/* FOOTER */
-footer { background: var(--navy); padding: 2rem 3rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
-footer p { font-size: 0.78rem; color: rgba(255,255,255,0.4); }
-.footer-brand { font-family: var(--display); font-size: 0.85rem; font-weight: 600; color: var(--gold); }
-footer a { color: rgba(255,255,255,0.55); text-decoration: none; font-size: 0.82rem; font-weight: 600; transition: color 0.25s; }
-footer a:hover { color: var(--gold); }
-
-/* REVEAL */
-.reveal {
-  opacity: 0;
-  transform: perspective(900px) rotateX(10deg) translateY(28px);
-  transform-origin: center bottom;
-  transition: opacity 0.8s cubic-bezier(.2,.8,.2,1), transform 0.8s cubic-bezier(.2,.8,.2,1);
-}
-.reveal.in { opacity: 1; transform: perspective(900px) rotateX(0deg) translateY(0); }
-.reveal.reveal-left { transform: perspective(900px) translateX(-50px) rotateY(10deg); }
-.reveal.reveal-left.in { transform: perspective(900px) translateX(0) rotateY(0); }
-.reveal.reveal-right { transform: perspective(900px) translateX(50px) rotateY(-10deg); }
-.reveal.reveal-right.in { transform: perspective(900px) translateX(0) rotateY(0); }
-
-/* CUSTOM CURSOR */
-#cursor-glow {
-  position: fixed; top: 0; left: 0; width: 34px; height: 34px; border-radius: 50%;
-  background: radial-gradient(circle, rgba(249,200,70,0.55), rgba(249,200,70,0) 70%);
-  filter: blur(4px);
-  pointer-events: none; z-index: 9999;
-  transform: translate(-50%, -50%);
-  transition: width 0.35s cubic-bezier(.2,.8,.2,1), height 0.35s cubic-bezier(.2,.8,.2,1), background 0.35s, filter 0.35s;
-  mix-blend-mode: normal;
-}
-#cursor-glow.hovering {
-  width: 64px; height: 64px;
-  background: radial-gradient(circle, rgba(58,27,94,0.35), rgba(249,200,70,0.25) 55%, transparent 75%);
-  filter: blur(6px);
-}
-#cursor-dot {
-  position: fixed; top: 0; left: 0; width: 7px; height: 7px; border-radius: 50%;
-  background: var(--purple);
-  pointer-events: none; z-index: 10000;
-  transform: translate(-50%, -50%);
-  transition: transform 0.15s, background 0.25s;
-}
-#cursor-dot.hovering { background: var(--gold); transform: translate(-50%, -50%) scale(0.4); }
-body.custom-cursor, body.custom-cursor a, body.custom-cursor button { cursor: none; }
-
-/* RESPONSIVE */
-@media (max-width: 900px) {
-  nav { padding: 1rem 1.25rem; }
-  .nav-links { display: none; }
-  .hero { grid-template-columns: 1fr; min-height: auto; }
-  .hero-dark { padding: 6.5rem 1.5rem 3rem; }
-  .hero-light { padding: 2.5rem 1.5rem 3.5rem; }
-  .metrics { grid-template-columns: 1fr 1fr; padding: 2.5rem 1.5rem; }
-  .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-  .exp-block { grid-template-columns: 1fr; gap: 1.25rem; }
-  .skills-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-  .contact-split { grid-template-columns: 1fr; gap: 2.5rem; }
-  .section { padding: 3.5rem 1.5rem; }
-  #contact { padding: 3.5rem 1.5rem; }
-  footer { padding: 1.5rem; }
-}
-</style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>George Stathopoulos – Customer Experience &amp; Quality Lead</title>
+<meta name="description" content="George Stathopoulos: customer experience and support operations leader with 13+ years in SaaS and WordPress. Builds AI workflows carefully, so people get more time for real conversations.">
+<meta name="theme-color" content="#2a1f6e">
+<link rel="canonical" href="https://george-stathopoulos.github.io/">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="George Stathopoulos – Customer Experience &amp; Quality Lead">
+<meta property="og:description" content="13+ years in SaaS customer experience. AI used carefully, so people get more time for real conversations.">
+<meta property="og:url" content="https://george-stathopoulos.github.io/">
+<meta property="og:image" content="https://george-stathopoulos.github.io/george-photo.jpg">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/site.css?v=2">
+<script>try{var t=localStorage.getItem('gs-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t;}catch(e){}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"George Stathopoulos","jobTitle":"Customer Experience & Quality Lead","worksFor":{"@type":"Organization","name":"WP Media"},"address":{"@type":"PostalAddress","addressLocality":"Athens","addressCountry":"GR"},"url":"https://george-stathopoulos.github.io/","sameAs":["https://www.linkedin.com/in/georgstathopoulos/"]}</script>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 
-<div id="cursor-glow"></div>
-<div id="cursor-dot"></div>
+<header class="site-head">
+	<div class="wrap">
+		<a class="brand" href="#top"><span class="monogram" aria-hidden="true">GS</span>George Stathopoulos</a>
+		<nav id="site-nav" class="nav" aria-label="Main">
+			<a href="#about">About</a>
+			<a href="#ai">Approach to AI</a>
+			<a href="#experience">Experience</a>
+			<a href="#skills">Skills</a>
+			<a href="#projects">Projects</a>
+			<a href="#contact">Contact</a>
+		</nav>
+		<div class="head-actions">
+			<button class="icon-btn" type="button" data-theme-toggle aria-label="Dark theme" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+			<a class="btn btn-primary btn-sm" href="george-stathopoulos-cv.pdf" download>Download CV</a>
+			<button class="icon-btn menu-btn" type="button" data-menu-toggle aria-controls="site-nav" aria-expanded="false" aria-label="Menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+		</div>
+	</div>
+</header>
 
-<!-- NAV -->
-<nav>
-  <a href="#top" class="nav-logo">G. Stathopoulos</a>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-  <a href="george-stathopoulos-cv.pdf" download class="btn-pill btn-nav-cv">Download CV</a>
-</nav>
+<main id="main">
 
-<!-- HERO -->
-<section class="hero" id="top">
-  <div class="hero-dark">
-    <canvas id="hero-canvas"></canvas>
-    <div class="hero-dark-content">
-      <div class="hero-photo-row">
-        <img src="george-photo.jpg" alt="George Stathopoulos" class="hero-photo">
-        <div>
-          <h1 class="hero-name">George Stathopoulos</h1>
-          <p class="hero-tag">Customer Experience &amp; Quality Lead</p>
-          <p class="hero-location">Athens, Greece · WP Media</p>
-        </div>
-      </div>
-      <div class="hero-ctas">
-        <a href="#experience" class="btn-pill btn-gold">View experience →</a>
-        <a href="#contact" class="btn-pill btn-outline-dark">Get in touch →</a>
-      </div>
-      <div class="hero-chips reveal">
-        <div class="hero-chip gold">
-          <div class="hero-chip-num">13+</div>
-          <div class="hero-chip-label">Years in SaaS &amp; support leadership</div>
-        </div>
-        <div class="hero-chip navy">
-          <div class="hero-chip-num">94%</div>
-          <div class="hero-chip-label">CSAT achieved at WP Media</div>
-        </div>
-        <div class="hero-chip navy">
-          <div class="hero-chip-num">18</div>
-          <div class="hero-chip-label">Support professionals led</div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="hero-light">
-    <p class="hero-summary-label">Professional Summary</p>
-    <p class="hero-summary">
-      13+ years transforming <strong>customer experience</strong> across SaaS products — scaling support operations, building AI-driven workflows, and turning insight into <strong>measurable outcomes</strong>.
-    </p>
-    <div class="hero-light-ctas">
-      <a href="george-stathopoulos-cv.pdf" download class="btn-pill btn-outline-light">↓ Download CV</a>
-    </div>
-  </div>
+<section class="hero" id="top" aria-labelledby="hero-name">
+	<canvas id="smoke" aria-hidden="true"></canvas>
+	<div class="wrap">
+		<div class="hero-grid">
+			<img class="portrait" src="assets/img/george.jpg" width="400" height="400" alt="Portrait of George Stathopoulos" fetchpriority="high">
+			<div>
+				<span class="eyebrow"><span class="dot" aria-hidden="true"></span>Athens, Greece · Customer Experience &amp; Quality Lead at WP Media</span>
+				<h1 id="hero-name">George Stathopoulos</h1>
+				<p class="role">Customer experience, built for people</p>
+				<p class="lede">13+ years transforming customer experience across SaaS products: scaling support operations, building AI-driven workflows and turning insight into measurable outcomes, while keeping real people at the centre.</p>
+				<div class="cta-row">
+					<a class="btn btn-light" href="#experience">View experience</a>
+					<a class="btn btn-outline-light" href="#contact">Get in touch</a>
+					<a class="btn btn-outline-light" href="george-stathopoulos-cv.pdf" download>Download CV (PDF)</a>
+				</div>
+			</div>
+		</div>
+		<ul class="stats" aria-label="Highlights">
+			<li><b>13+</b><span>years in SaaS and support leadership</span></li>
+			<li><b>94%</b><span>CSAT achieved at WP Media</span></li>
+			<li><b>~30%</b><span>fewer Imagify tickets through AI automation</span></li>
+			<li><b>~18</b><span>support professionals led and developed</span></li>
+		</ul>
+	</div>
 </section>
 
-<!-- MARQUEE -->
-<div class="marquee-strip" aria-hidden="true">
-  <div class="marquee-track">
-    <span class="marquee-item">Customer Experience Strategy <span class="marquee-dot"></span></span>
-    <span class="marquee-item">Zendesk Administration <span class="marquee-dot"></span></span>
-    <span class="marquee-item">AI-Powered Support Automation <span class="marquee-dot"></span></span>
-    <span class="marquee-item">Support Operations Leadership <span class="marquee-dot"></span></span>
-    <span class="marquee-item">Knowledge Management <span class="marquee-dot"></span></span>
-    <span class="marquee-item">Cross-Functional Leadership <span class="marquee-dot"></span></span>
-    <span class="marquee-item">Service Design <span class="marquee-dot"></span></span>
-    <span class="marquee-item">Documentation Strategy <span class="marquee-dot"></span></span>
-    <span class="marquee-item">Customer Experience Strategy <span class="marquee-dot"></span></span>
-    <span class="marquee-item">Zendesk Administration <span class="marquee-dot"></span></span>
-    <span class="marquee-item">AI-Powered Support Automation <span class="marquee-dot"></span></span>
-    <span class="marquee-item">Support Operations Leadership <span class="marquee-dot"></span></span>
-    <span class="marquee-item">Knowledge Management <span class="marquee-dot"></span></span>
-    <span class="marquee-item">Cross-Functional Leadership <span class="marquee-dot"></span></span>
-    <span class="marquee-item">Service Design <span class="marquee-dot"></span></span>
-    <span class="marquee-item">Documentation Strategy <span class="marquee-dot"></span></span>
-  </div>
-</div>
-
-<!-- METRICS -->
-<div class="metrics">
-  <div class="metric-card c-gold reveal tilt" data-index="01">
-    <div class="metric-num">13+</div>
-    <div class="metric-label">Years in SaaS &amp; support leadership</div>
-  </div>
-  <div class="metric-card c-navy reveal tilt" data-index="02">
-    <div class="metric-num">94%</div>
-    <div class="metric-label">CSAT achieved at WP Media</div>
-  </div>
-  <div class="metric-card c-purple reveal tilt" data-index="03">
-    <div class="metric-num">30%</div>
-    <div class="metric-label">Ticket volume reduction via AI automation</div>
-  </div>
-  <div class="metric-card c-white reveal tilt" data-index="04">
-    <div class="metric-num">18</div>
-    <div class="metric-label">Support professionals led &amp; developed</div>
-  </div>
-</div>
-
-<!-- ABOUT -->
-<section class="section" id="about">
-  <div class="section-header">
-    <span class="section-num">01</span>
-    <span class="section-title">About</span>
-    <div class="section-rule"></div>
-  </div>
-  <div class="about-grid">
-    <div class="about-body reveal reveal-left">
-      <h2 class="about-headline">Support operations as a <span>strategic asset</span></h2>
-      <p>I specialise in transforming support from a reactive cost centre into a proactive customer experience engine. My work spans Zendesk migrations, AI-driven automation, quality governance, and cross-functional alignment — connecting Support with Product, Engineering, and Marketing to drive outcomes that genuinely matter.</p>
-      <p>I'm known for reducing friction at scale: building workflows that hold up under pressure, translating raw ticket data into structured insights that influence product direction, and designing quality systems that make great support repeatable — not accidental.</p>
-      <p>Whether architecting a knowledge governance framework, leading a team of 18, or running a full Zendesk migration from scratch, I operate with the same principle: quality at scale is a design problem.</p>
-    </div>
-    <div class="about-details reveal reveal-right">
-      <div class="detail-row"><span class="detail-key">Current role</span><span class="detail-val">CX &amp; Quality Lead, WP Media</span></div>
-      <div class="detail-row"><span class="detail-key">Location</span><span class="detail-val">Athens, Greece</span></div>
-      <div class="detail-row"><span class="detail-key">Industry</span><span class="detail-val">SaaS · WordPress ecosystem</span></div>
-      <div class="detail-row"><span class="detail-key">Languages</span><span class="detail-val">Greek (Native)<br>English (Professional)</span></div>
-      <div class="detail-row"><span class="detail-key">Specialisms</span><span class="detail-val">Support Transformation · AI Automation · Quality Systems</span></div>
-    </div>
-  </div>
+<section class="section" id="about" aria-labelledby="about-title">
+	<div class="wrap about">
+		<div class="about-text reveal">
+			<span class="kicker">About</span>
+			<h2 id="about-title" class="about-title">Support operations as a strategic asset</h2>
+			<p>I specialise in transforming support from a reactive cost centre into a proactive customer experience engine. My work spans Zendesk migrations, AI-driven automation, quality governance and cross-functional alignment, connecting Support with Product, Engineering and Marketing to drive outcomes that genuinely matter.</p>
+			<p>I'm known for reducing friction at scale: building workflows that hold up under pressure, translating raw ticket data into structured insights that influence product direction, and designing quality systems that make great support repeatable, not accidental.</p>
+			<p>Whether architecting a knowledge governance framework, leading a team of 18 or running a full Zendesk migration from scratch, I work with the same principle: quality at scale is a design problem.</p>
+		</div>
+		<dl class="facts reveal">
+			<div><dt>Current role</dt><dd>Customer Experience &amp; Quality Lead, WP Media</dd></div>
+			<div><dt>Location</dt><dd>Athens, Greece</dd></div>
+			<div><dt>Industry</dt><dd>SaaS · WordPress ecosystem</dd></div>
+			<div><dt>Languages</dt><dd>Greek (native) · English (professional)</dd></div>
+			<div><dt>Focus</dt><dd>Support transformation · AI automation · Quality systems</dd></div>
+		</dl>
+	</div>
 </section>
 
-<!-- EXPERIENCE -->
-<section class="section" id="experience">
-  <div class="section-header">
-    <span class="section-num">02</span>
-    <span class="section-title">Experience</span>
-    <div class="section-rule"></div>
-  </div>
-
-  <div class="exp-block reveal">
-    <div class="exp-sidebar">
-      <div class="exp-company-name">WP Media</div>
-      <div class="exp-period-range">Mar 2023 — Present</div>
-      <div class="exp-products">
-        <span class="product-chip">WP Rocket</span>
-        <span class="product-chip">Imagify</span>
-        <span class="product-chip">RocketCDN</span>
-      </div>
-    </div>
-    <div class="exp-roles">
-      <div class="exp-role-item">
-        <div class="exp-role-meta">
-          <div class="exp-role-name">Customer Experience &amp; Quality Lead<span class="badge-now">Current</span></div>
-          <div class="exp-role-dates">Jan 2026 — Present</div>
-        </div>
-        <p class="exp-role-desc">Promoted to own end-to-end customer experience and quality strategy across WP Media's product suite. Responsible for quality governance, documentation strategy, AI-driven support optimisation, and cross-functional alignment with Product, Engineering, and Marketing.</p>
-      </div>
-      <div class="exp-divider"></div>
-      <div class="exp-role-item">
-        <div class="exp-role-meta">
-          <div class="exp-role-name">Head of Support</div>
-          <div class="exp-role-dates">Mar 2023 — Jan 2026</div>
-        </div>
-        <p class="exp-role-desc">Led support operations transformation across WP Media — from tooling infrastructure and team performance to AI automation and customer experience strategy.</p>
-        <ul class="exp-achievements">
-          <li>Led migration from Help Scout (8 mailboxes) to Zendesk, building a scalable operations platform across multiple products and teams</li>
-          <li>Reduced First Response Time from ~24 hours to a few hours via workflow redesign and prioritisation logic</li>
-          <li>Increased CSAT from 90% to 94% through structured quality programs and process improvements</li>
-          <li>Reduced Imagify ticket volume by ~30% via AI-powered automation and improved self-service flows</li>
-          <li>Designed and implemented 100+ standardised support workflows, improving consistency across teams</li>
-          <li>Established structured escalation processes across Support, Product, and Engineering</li>
-          <li>Introduced support tiering frameworks that reduced unnecessary escalations and improved operational clarity</li>
-          <li>Built RocketCare — a premium support service for installation and onboarding</li>
-          <li>Led and developed a team of ~18 support professionals through coaching frameworks and quality systems</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <div class="exp-block reveal">
-    <div class="exp-sidebar">
-      <div class="exp-company-name">WPMU DEV</div>
-      <div class="exp-period-range">Jun 2013 — Mar 2023</div>
-    </div>
-    <div class="exp-roles">
-      <div class="exp-role-item">
-        <div class="exp-role-meta">
-          <div class="exp-role-name">Head of Sales &amp; Accounts</div>
-          <div class="exp-role-dates">Jul 2017 — Mar 2023</div>
-        </div>
-        <p class="exp-role-desc">Led global accounts and customer operations across a distributed SaaS organisation — owning onboarding, retention, account management, and customer success workflows.</p>
-        <ul class="exp-achievements">
-          <li>Improved operational scalability through reporting systems and customer lifecycle process design</li>
-          <li>Partnered with support and product teams to improve retention and satisfaction outcomes</li>
-        </ul>
-      </div>
-      <div class="exp-divider"></div>
-      <div class="exp-role-item">
-        <div class="exp-role-meta">
-          <div class="exp-role-name">Support Team Lead</div>
-          <div class="exp-role-dates">May 2015 — Jul 2017</div>
-        </div>
-        <p class="exp-role-desc">Led a support team responsible for customer issue resolution, onboarding, and product guidance.</p>
-        <ul class="exp-achievements">
-          <li>Implemented coaching, training, and performance frameworks to improve team consistency and output quality</li>
-          <li>Collaborated with leadership to improve support workflows and reduce resolution friction</li>
-        </ul>
-      </div>
-      <div class="exp-divider"></div>
-      <div class="exp-role-item">
-        <div class="exp-role-meta">
-          <div class="exp-role-name">Accounts Support Specialist</div>
-          <div class="exp-role-dates">Jun 2013 — May 2015</div>
-        </div>
-        <p class="exp-role-desc">Managed customer accounts, billing issues, and retention-related inquiries. Contributed to early-stage support workflow improvements and customer onboarding processes.</p>
-      </div>
-    </div>
-  </div>
+<section class="section section-alt" id="ai" aria-labelledby="ai-title">
+	<div class="wrap">
+		<div class="ai-intro">
+			<div class="section-head reveal">
+				<span class="kicker">Approach to AI</span>
+				<h2 id="ai-title">AI used carefully, and for people</h2>
+				<p>I build AI into support and product workflows every day, so I've seen what it does well and where it goes wrong. My rule is simple: AI should never replace people. It should give them back time for the conversations that matter.</p>
+			</div>
+			<blockquote class="pull reveal">
+				<p>“The best use of AI is not fewer people. It's people with more time for each other.”</p>
+				<cite>How I approach every AI project</cite>
+			</blockquote>
+		</div>
+		<ul class="principles">
+			<li class="reveal">
+				<span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.5 3.4-5.5 6.5-5.5s5.7 2 6.5 5.5"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18.5 14.8c1.6.8 2.7 2.6 3 5.2"/></svg></span>
+				<h3>People stay in charge</h3>
+				<p>AI drafts, sorts and suggests. People decide, especially when a customer is upset, money is involved or the answer isn't obvious.</p>
+			</li>
+			<li class="reveal">
+				<span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/></svg></span>
+				<h3>Automate the repetitive, not the relationship</h3>
+				<p>Let automation answer the same question for the hundredth time, so the team can give real attention to the conversations that need a human.</p>
+			</li>
+			<li class="reveal">
+				<span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span>
+				<h3>Privacy by default</h3>
+				<p>Customer data shouldn't leave your hands without a reason. It's why I built <a href="#projects">Gatehouse</a> to strip personal data before it ever reaches an AI provider.</p>
+			</li>
+			<li class="reveal">
+				<span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></span>
+				<h3>Honest about it</h3>
+				<p>People deserve to know when they're talking to a machine, and they should always be able to reach a person.</p>
+			</li>
+			<li class="reveal wide">
+				<span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span>
+				<h3>Measure, then trust</h3>
+				<p>Every AI workflow has to earn its place with evidence: quality, customer satisfaction and cost, reviewed regularly rather than assumed. If it doesn't make the experience better for customers and the team, it goes.</p>
+			</li>
+		</ul>
+	</div>
 </section>
 
-<!-- SKILLS -->
-<section id="skills" class="section">
-  <div class="section-header">
-    <span class="section-num">03</span>
-    <span class="section-title">Skills &amp; Tools</span>
-    <div class="section-rule"></div>
-  </div>
-  <div class="skills-grid">
-    <div class="reveal reveal-left">
-      <p class="skills-col-title">Core Competencies</p>
-      <div class="skills-tags">
-        <span class="skill-tag">Customer Experience Strategy</span>
-        <span class="skill-tag">Support Operations Leadership</span>
-        <span class="skill-tag">AI-Powered Support Automation</span>
-        <span class="skill-tag">Process &amp; Workflow Design</span>
-        <span class="skill-tag">Knowledge Management</span>
-        <span class="skill-tag">Service Design</span>
-        <span class="skill-tag">Customer Journey Optimisation</span>
-        <span class="skill-tag">Support Analytics &amp; Reporting</span>
-        <span class="skill-tag">Escalation Management</span>
-        <span class="skill-tag">Cross-Functional Leadership</span>
-        <span class="skill-tag">Documentation Strategy</span>
-        <span class="skill-tag">Operational Scaling</span>
-        <span class="skill-tag">Zendesk Administration</span>
-        <span class="skill-tag">Help Scout Administration</span>
-        <span class="skill-tag">Quality Governance</span>
-      </div>
-    </div>
-    <div class="reveal reveal-right">
-      <p class="skills-col-title">Tools &amp; Platforms</p>
-      <div class="tools-list">
-        <div class="tool-row">Zendesk <span class="tool-dot"></span></div>
-        <div class="tool-row">Help Scout <span class="tool-dot"></span></div>
-        <div class="tool-row">Metabase <span class="tool-dot"></span></div>
-        <div class="tool-row">Looker Studio <span class="tool-dot"></span></div>
-        <div class="tool-row">Jira &amp; Asana <span class="tool-dot"></span></div>
-        <div class="tool-row">Mixpanel <span class="tool-dot"></span></div>
-        <div class="tool-row">Stripe <span class="tool-dot"></span></div>
-        <div class="tool-row">Google Workspace <span class="tool-dot"></span></div>
-        <div class="tool-row">AI Support Tools <span class="tool-dot"></span></div>
-      </div>
-    </div>
-  </div>
+<section class="section" id="experience" aria-labelledby="exp-title">
+	<div class="wrap">
+		<div class="section-head reveal">
+			<span class="kicker">Experience</span>
+			<h2 id="exp-title">13 years in SaaS customer experience</h2>
+		</div>
+
+		<article class="company reveal">
+			<div>
+				<h3 class="company-name">WP Media</h3>
+				<p class="period">Mar 2023 – present</p>
+				<ul class="chips" aria-label="Products"><li>WP Rocket</li><li>Imagify</li><li>RocketCDN</li></ul>
+			</div>
+			<div class="roles">
+				<div>
+					<div class="role-head"><h4>Customer Experience &amp; Quality Lead <span class="now">Current</span></h4><time>Jan 2026 – present</time></div>
+					<p>Promoted to own end-to-end customer experience and quality strategy across WP Media's products: quality governance, documentation strategy, AI-driven support optimisation and cross-functional alignment with Product, Engineering and Marketing.</p>
+				</div>
+				<div>
+					<div class="role-head"><h4>Head of Support</h4><time>Mar 2023 – Jan 2026</time></div>
+					<p>Led the transformation of support operations, from tooling and team performance to AI automation and customer experience strategy.</p>
+					<ul>
+						<li>Led the migration from Help Scout (8 mailboxes) to Zendesk, building a scalable operations platform across products and teams</li>
+						<li>Reduced first response time from ~24 hours to a few hours through workflow redesign and prioritisation logic</li>
+						<li>Increased CSAT from 90% to 94% through structured quality programmes and process improvements</li>
+						<li>Reduced Imagify ticket volume by ~30% through AI-powered automation and better self-service</li>
+						<li>Designed and implemented 100+ standardised support workflows, improving consistency across teams</li>
+						<li>Established structured escalation processes across Support, Product and Engineering</li>
+						<li>Introduced support tiering frameworks that reduced unnecessary escalations</li>
+						<li>Built RocketCare, a premium support service for installation and onboarding</li>
+						<li>Led and developed a team of ~18 support professionals through coaching frameworks and quality systems</li>
+					</ul>
+				</div>
+			</div>
+		</article>
+
+		<article class="company reveal">
+			<div>
+				<h3 class="company-name">WPMU DEV</h3>
+				<p class="period">Jun 2013 – Mar 2023</p>
+			</div>
+			<div class="roles">
+				<div>
+					<div class="role-head"><h4>Head of Sales &amp; Accounts</h4><time>Jul 2017 – Mar 2023</time></div>
+					<p>Led global accounts and customer operations across a distributed SaaS organisation, owning onboarding, retention, account management and customer success workflows.</p>
+					<ul>
+						<li>Improved operational scalability through reporting systems and customer lifecycle process design</li>
+						<li>Partnered with support and product teams to improve retention and satisfaction</li>
+					</ul>
+				</div>
+				<div>
+					<div class="role-head"><h4>Support Team Lead</h4><time>May 2015 – Jul 2017</time></div>
+					<p>Led a support team responsible for customer issue resolution, onboarding and product guidance.</p>
+					<ul>
+						<li>Implemented coaching, training and performance frameworks to improve consistency and quality</li>
+						<li>Worked with leadership to improve support workflows and reduce resolution friction</li>
+					</ul>
+				</div>
+				<div>
+					<div class="role-head"><h4>Accounts Support Specialist</h4><time>Jun 2013 – May 2015</time></div>
+					<p>Managed customer accounts, billing and retention enquiries, and contributed to early support workflow and onboarding improvements.</p>
+				</div>
+			</div>
+		</article>
+	</div>
 </section>
 
-<!-- CONTACT -->
-<section class="section" id="contact">
-  <div class="section-header">
-    <span class="section-num">04</span>
-    <span class="section-title">Get in Touch</span>
-    <div class="section-rule"></div>
-  </div>
-  <div class="contact-split">
-    <div class="reveal reveal-left">
-      <h2 class="contact-headline">Let's build something <span>worth experiencing.</span></h2>
-      <p class="contact-sub">Open to conversations about senior CX, support operations, or quality leadership roles. Always happy to connect.</p>
-    </div>
-    <div class="contact-actions reveal reveal-right">
-      <a href="mailto:mindanticipation@gmail.com" class="contact-link">
-        <div class="contact-link-icon">✉</div>
-        <div>
-          <div class="contact-link-label">Email</div>
-          <div class="contact-link-value">mindanticipation@gmail.com</div>
-        </div>
-        <span class="contact-link-arrow">→</span>
-      </a>
-      <a href="https://www.linkedin.com/in/georgstathopoulos/" target="_blank" rel="noopener" class="contact-link">
-        <div class="contact-link-icon">in</div>
-        <div>
-          <div class="contact-link-label">LinkedIn</div>
-          <div class="contact-link-value">linkedin.com/in/georgstathopoulos</div>
-        </div>
-        <span class="contact-link-arrow">→</span>
-      </a>
-      <a href="george-stathopoulos-cv.pdf" download class="contact-link">
-        <div class="contact-link-icon">↓</div>
-        <div>
-          <div class="contact-link-label">Résumé</div>
-          <div class="contact-link-value">Download CV (PDF)</div>
-        </div>
-        <span class="contact-link-arrow">→</span>
-      </a>
-    </div>
-  </div>
+<section class="section section-alt" id="skills" aria-labelledby="skills-title">
+	<div class="wrap">
+		<div class="section-head reveal">
+			<span class="kicker">Skills</span>
+			<h2 id="skills-title">What I bring</h2>
+		</div>
+		<div class="skills">
+			<div class="reveal">
+				<h3>Core competencies</h3>
+				<ul class="tags">
+					<li>Customer experience strategy</li><li>Support operations leadership</li><li>AI-powered support automation</li><li>Process and workflow design</li><li>Knowledge management</li><li>Service design</li><li>Customer journey optimisation</li><li>Support analytics and reporting</li><li>Escalation management</li><li>Cross-functional leadership</li><li>Documentation strategy</li><li>Operational scaling</li><li>Quality governance</li>
+				</ul>
+			</div>
+			<div class="reveal">
+				<h3>Tools and platforms</h3>
+				<ul class="tags">
+					<li>Zendesk</li><li>Help Scout</li><li>Metabase</li><li>Looker Studio</li><li>Jira</li><li>Asana</li><li>Trello</li><li>Mixpanel</li><li>Stripe</li><li>Hubstaff</li><li>Google Workspace</li><li>AI support tools</li>
+				</ul>
+			</div>
+		</div>
+	</div>
 </section>
 
-<footer>
-  <p>© 2026 George Stathopoulos · Athens, Greece</p>
-  <a href="george-stathopoulos-cv.pdf" download>Download CV ↓</a>
-  <span class="footer-brand">Customer Experience &amp; Quality Lead</span>
+<section class="section" id="projects" aria-labelledby="projects-title">
+	<div class="wrap">
+		<div class="section-head reveal">
+			<span class="kicker">Projects</span>
+			<h2 id="projects-title">Things I've built</h2>
+			<p>Side projects where I put my approach to AI into practice.</p>
+		</div>
+		<div class="projects">
+			<!--
+				To add a project, copy one <article class="project"> block below.
+				Use class="project featured" for a wide card with a screenshot, or class="project" for a half-width card.
+				Put its screenshot in assets/img/ (about 1400px wide).
+			-->
+			<article class="project featured reveal">
+				<div class="project-shot">
+					<img src="assets/img/project-gatehouse.jpg" width="1400" height="875" alt="The Gatehouse dashboard in WordPress, showing AI spend by plugin, the monthly budget and items that need attention." loading="lazy" decoding="async">
+				</div>
+				<div class="project-body">
+					<div class="project-meta"><span class="status">Live</span><span>2026 · WordPress plugin · Free and open source</span></div>
+					<h3>Gatehouse</h3>
+					<p class="sub">AI cost, budget and privacy control for WordPress</p>
+					<p>WordPress 7.0 lets every plugin on a site share one AI connection, with no spending limit and no visibility. Gatehouse sits between the plugins and the AI provider.</p>
+					<ul class="points">
+						<li>Shows which plugin spends what, call by call</li>
+						<li>Monthly budgets that actually stop runaway spending</li>
+						<li>Removes personal data before it reaches the AI provider</li>
+						<li>Accessible (WCAG 2.2 AA) and GDPR-ready</li>
+					</ul>
+					<ul class="tags" aria-label="Topics"><li>WordPress</li><li>AI governance</li><li>Privacy</li><li>Product design</li></ul>
+					<div class="cta-row">
+						<a class="btn btn-primary" href="https://george-stathopoulos.github.io/gatehouse/">Visit the website</a>
+						<a class="btn btn-ghost" href="https://george-stathopoulos.github.io/gatehouse/docs/">Help center</a>
+					</div>
+				</div>
+			</article>
+			<div class="project soon reveal">
+				<span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span>
+				<h3>Next project in progress</h3>
+				<p>More tools that put people first are on the way. Check back soon.</p>
+			</div>
+			<div class="project soon reveal">
+				<span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16v12H5.2L4 17.2z"/><path d="M8 9h8M8 12h5"/></svg></span>
+				<h3>Have an idea?</h3>
+				<p>I'm always happy to talk about customer experience, support and responsible AI. <a href="#contact">Get in touch</a>.</p>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="section" id="contact" aria-labelledby="contact-title" style="padding-top:0">
+	<div class="wrap">
+		<div class="contact reveal">
+			<div>
+				<span class="kicker" style="color:#d9d4ff">Contact</span>
+				<h2 id="contact-title">Let's build something worth experiencing</h2>
+				<p>Open to conversations about senior CX, support operations and quality leadership roles. Always happy to connect.</p>
+			</div>
+			<div class="contact-links">
+				<a href="mailto:mindanticipation@gmail.com"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span><span><small>Email</small><b>mindanticipation@gmail.com</b></span><span class="arrow" aria-hidden="true">→</span></a>
+				<a href="https://www.linkedin.com/in/georgstathopoulos/" rel="noopener"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.6h.06c.53-1 1.83-2.06 3.77-2.06 4.03 0 4.77 2.65 4.77 6.1V21h-4v-5.1c0-1.22-.02-2.79-1.7-2.79-1.7 0-1.96 1.33-1.96 2.7V21h-4z"/></svg></span><span><small>LinkedIn</small><b>linkedin.com/in/georgstathopoulos</b></span><span class="arrow" aria-hidden="true">→</span></a>
+				<a href="george-stathopoulos-cv.pdf" download><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></span><span><small>Résumé</small><b>Download CV (PDF)</b></span><span class="arrow" aria-hidden="true">→</span></a>
+			</div>
+		</div>
+	</div>
+</section>
+
+</main>
+
+<footer class="site-foot">
+	<div class="wrap">
+		<span>© 2026 George Stathopoulos · Athens, Greece</span>
+		<span>Made with <span class="heart" role="img" aria-label="love">♥</span> · <a href="https://george-stathopoulos.github.io/gatehouse/">Gatehouse</a> · No cookies, no tracking</span>
+	</div>
 </footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script>
-  // Scroll reveal — replays both ways: elements animate in when scrolled into view,
-  // and reverse back out when scrolled past (up or down), instead of a one-time reveal.
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) e.target.classList.add('in');
-      else e.target.classList.remove('in');
-    });
-  }, { threshold: 0.08 });
-  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-
-  // Metric card tilt on pointer move
-  document.querySelectorAll('.tilt').forEach(card => {
-    card.addEventListener('mousemove', e => {
-      const r = card.getBoundingClientRect();
-      const x = (e.clientX - r.left) / r.width - 0.5;
-      const y = (e.clientY - r.top) / r.height - 0.5;
-      card.style.transform = `perspective(600px) rotateX(${-y * 10}deg) rotateY(${x * 10}deg) translateY(-4px)`;
-    });
-    card.addEventListener('mouseleave', () => { card.style.transform = ''; });
-  });
-
-  // 3D scroll-reactive object in the hero
-  (function () {
-    const canvas = document.getElementById('hero-canvas');
-    if (!canvas || !window.THREE) return;
-    const heroDark = document.querySelector('.hero-dark');
-
-    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
-    const CAMERA_Z = 5.5;
-    camera.position.z = CAMERA_Z;
-
-    // Base world-space offsets for the two shapes (before aspect-based clamping)
-    const shapeBaseX = 2.0, shapeBaseY = 0.2;
-    const shape2BaseX = -1.6, shape2BaseY = -1.1;
-
-    function visibleWidthAtZ(z) {
-      const vFOV = camera.fov * Math.PI / 180;
-      const h = 2 * Math.tan(vFOV / 2) * Math.abs(CAMERA_Z - z);
-      return h * camera.aspect;
-    }
-
-    function size() {
-      const w = heroDark.clientWidth, h = heroDark.clientHeight;
-      renderer.setSize(w, h, false);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      camera.aspect = w / (h || 1);
-      camera.updateProjectionMatrix();
-      // Clamp each shape's x-offset to a safe fraction of what's actually visible at its
-      // depth, so it stays framed regardless of how narrow/wide this column ends up being
-      // (this column is often close to square or even portrait, not just full-page width).
-      const vw0 = visibleWidthAtZ(shape.position.z || 0);
-      const vw1 = visibleWidthAtZ(shape2.position.z);
-      shape.position.x = Math.sign(shapeBaseX) * Math.min(Math.abs(shapeBaseX), vw0 * 0.3);
-      shape2.position.x = Math.sign(shape2BaseX) * Math.min(Math.abs(shape2BaseX), vw1 * 0.28);
-    }
-
-    const geo = new THREE.IcosahedronGeometry(2.3, 1);
-    const wire = new THREE.WireframeGeometry(geo);
-    const mat = new THREE.LineBasicMaterial({ color: 0xF9C846, transparent: true, opacity: 0.7 });
-    const shape = new THREE.LineSegments(wire, mat);
-    shape.position.y = shapeBaseY;
-    scene.add(shape);
-
-    const geo2 = new THREE.IcosahedronGeometry(0.95, 0);
-    const wire2 = new THREE.WireframeGeometry(geo2);
-    const mat2 = new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.28 });
-    const shape2 = new THREE.LineSegments(wire2, mat2);
-    shape2.position.y = shape2BaseY;
-    shape2.position.z = -1;
-    scene.add(shape2);
-
-    size();
-    window.addEventListener('resize', size);
-
-    let targetScroll = 0, currentScroll = 0;
-    function onScroll() {
-      const rect = heroDark.getBoundingClientRect();
-      const progress = Math.min(Math.max(-rect.top / (rect.height || 1), 0), 1);
-      targetScroll = progress;
-    }
-    window.addEventListener('scroll', onScroll, { passive: true });
-
-    let mx = 0, my = 0;
-    window.addEventListener('mousemove', e => {
-      mx = (e.clientX / window.innerWidth - 0.5);
-      my = (e.clientY / window.innerHeight - 0.5);
-    });
-
-    let visible = true;
-    const io = new IntersectionObserver(es => { visible = es[0].isIntersecting; }, { threshold: 0 });
-    io.observe(heroDark);
-
-    function animate() {
-      requestAnimationFrame(animate);
-      if (!visible) return;
-      currentScroll += (targetScroll - currentScroll) * 0.08;
-      const t = performance.now() * 0.0002;
-      shape.rotation.x = currentScroll * Math.PI * 1.4 + my * 0.3 + t;
-      shape.rotation.y = currentScroll * Math.PI * 2 + mx * 0.4 + t * 1.4;
-      shape.scale.setScalar(1 + currentScroll * 0.15);
-      shape2.rotation.x -= 0.004;
-      shape2.rotation.y += 0.006;
-      shape2.position.y = shape2BaseY + currentScroll * 0.6;
-      renderer.render(scene, camera);
-    }
-    animate();
-  })();
-
-  // Subtle 3D tilt on the profile photo, driven by scroll progress through the hero
-  (function () {
-    const photo = document.querySelector('.hero-photo');
-    const heroDark = document.querySelector('.hero-dark');
-    if (!photo || !heroDark) return;
-    window.addEventListener('scroll', () => {
-      const rect = heroDark.getBoundingClientRect();
-      const progress = Math.min(Math.max(-rect.top / (rect.height || 1), 0), 1);
-      photo.style.transform = `perspective(600px) rotateY(${progress * 14}deg) rotateX(${progress * -6}deg)`;
-    }, { passive: true });
-  })();
-  // Scroll-linked horizontal marquee: idle drift plus a boost tied to scroll velocity/direction
-  (function () {
-    const track = document.querySelector('.marquee-track');
-    if (!track) return;
-    let shift = 0;
-    let lastY = window.scrollY;
-    function loop() {
-      requestAnimationFrame(loop);
-      const currentY = window.scrollY;
-      const delta = currentY - lastY;
-      lastY = currentY;
-      shift += 0.4 + delta * 1.1; // constant idle drift + scroll-direction boost
-      const half = track.scrollWidth / 2 || 1;
-      const x = -(((shift % half) + half) % half);
-      track.style.transform = `translateX(${x}px)`;
-    }
-    loop();
-  })();
-
-  // Interactive cursor: soft blurred glow that trails the pointer and reacts to hoverables
-  (function () {
-    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-    document.body.classList.add('custom-cursor');
-    const dot = document.getElementById('cursor-dot');
-    const glow = document.getElementById('cursor-glow');
-    let mx = window.innerWidth / 2, my = window.innerHeight / 2;
-    let gx = mx, gy = my;
-    window.addEventListener('mousemove', e => {
-      mx = e.clientX; my = e.clientY;
-      dot.style.left = mx + 'px';
-      dot.style.top = my + 'px';
-    });
-    function loop() {
-      requestAnimationFrame(loop);
-      gx += (mx - gx) * 0.16;
-      gy += (my - gy) * 0.16;
-      glow.style.left = gx + 'px';
-      glow.style.top = gy + 'px';
-    }
-    loop();
-    const hoverables = document.querySelectorAll('a, button, .metric-card, .contact-link, .skill-tag, .tool-row, .btn-pill');
-    hoverables.forEach(el => {
-      el.addEventListener('mouseenter', () => { dot.classList.add('hovering'); glow.classList.add('hovering'); });
-      el.addEventListener('mouseleave', () => { dot.classList.remove('hovering'); glow.classList.remove('hovering'); });
-    });
-  })();
-</script>
+<script src="assets/site.js?v=2" defer></script>
 </body>
 </html>

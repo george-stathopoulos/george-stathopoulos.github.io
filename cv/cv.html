@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>George Stathopoulos – CV</title>
+<!--
+	Source of george-stathopoulos-cv.pdf. Edit this file, then run: node cv/build-cv.mjs
+-->
+<style>
+@page { size: A4; margin: 14mm 0 12mm; }
+@page :first { margin-top: 0; }
+:root {
+	--ink: #141413;
+	--ink-2: #3d3d3a;
+	--muted: #6b6963;
+	--line: #e6e4dd;
+	--accent: #4a3aa7;
+	--accent-soft: #efedf9;
+	--hero: linear-gradient(135deg, #3b2d91 0%, #2a1f6e 55%, #17123d 100%);
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+	font: 9.6pt/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+	color: var(--ink-2);
+	-webkit-print-color-adjust: exact;
+	print-color-adjust: exact;
+}
+a { color: inherit; text-decoration: none; }
+h1, h2, h3 { color: var(--ink); margin: 0; letter-spacing: -0.01em; }
+
+.page { width: 210mm; padding: 0 16mm 12mm; }
+
+/* Header band */
+.head {
+	background: var(--hero);
+	color: #fff;
+	margin: 0 -16mm 7mm;
+	padding: 11mm 16mm 9mm;
+	display: grid;
+	grid-template-columns: auto 1fr;
+	gap: 7mm;
+	align-items: center;
+}
+.head img {
+	width: 27mm;
+	height: 27mm;
+	border-radius: 50%;
+	object-fit: cover;
+	border: 0.7mm solid rgba(255, 255, 255, 0.85);
+}
+.head h1 { color: #fff; font-size: 24pt; letter-spacing: -0.02em; line-height: 1.1; }
+.head .title { font-size: 12pt; font-weight: 600; color: #d9d4ff; margin: 1.2mm 0 3mm; }
+.contact { display: flex; flex-wrap: wrap; gap: 1mm 5mm; font-size: 8.8pt; color: rgba(255, 255, 255, 0.88); }
+.contact span { white-space: nowrap; }
+.contact b { font-weight: 600; color: #fff; }
+
+/* Sections */
+section { margin-bottom: 5.2mm; }
+h2 {
+	font-size: 8.4pt;
+	text-transform: uppercase;
+	letter-spacing: 0.12em;
+	color: var(--accent);
+	padding-bottom: 1.4mm;
+	border-bottom: 0.3mm solid var(--line);
+	margin-bottom: 2.6mm;
+}
+p { margin: 0 0 1.6mm; }
+.profile { font-size: 10pt; color: var(--ink-2); }
+
+/* Highlights */
+.highlights { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3mm; margin: 0 0 5.5mm; padding: 0; list-style: none; }
+.highlights li { background: var(--accent-soft); border-radius: 2.5mm; padding: 3mm 3.5mm; }
+.highlights b { display: block; font-size: 15pt; color: var(--accent); letter-spacing: -0.02em; line-height: 1.1; }
+.highlights span { font-size: 8.2pt; color: var(--ink-2); line-height: 1.3; display: block; margin-top: 0.8mm; }
+
+/* Experience */
+.company { margin-bottom: 3.8mm; break-inside: avoid-page; }
+.company-head { display: flex; justify-content: space-between; align-items: baseline; gap: 4mm; margin-bottom: 1.6mm; }
+.company-head h3 { font-size: 11.5pt; }
+.company-head h3 small { font-size: 9pt; font-weight: 500; color: var(--muted); margin-left: 1.5mm; }
+.dates { font-size: 8.8pt; color: var(--muted); white-space: nowrap; }
+.role { margin: 0 0 2.6mm; padding-left: 3.5mm; border-left: 0.5mm solid var(--line); break-inside: avoid; }
+.role-head { display: flex; justify-content: space-between; align-items: baseline; gap: 4mm; margin-bottom: 0.8mm; }
+.role-head h4 { margin: 0; color: var(--ink); font-size: 10pt; display: flex; align-items: center; gap: 2mm; }
+.now { font-size: 7pt; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: #006300; background: #e7f4e7; border-radius: 99px; padding: 0.4mm 2mm; }
+ul.points { margin: 1mm 0 0; padding: 0; list-style: none; }
+ul.points li { position: relative; padding-left: 3.6mm; margin-bottom: 0.7mm; }
+ul.points li::before { content: ""; position: absolute; left: 0.4mm; top: 0.62em; width: 1.3mm; height: 1.3mm; border-radius: 50%; background: var(--accent); opacity: 0.65; }
+
+/* Two columns at the end */
+.cols { display: grid; grid-template-columns: 1.35fr 1fr; gap: 7mm; }
+.tags { display: flex; flex-wrap: wrap; gap: 1.4mm; margin: 0; padding: 0; list-style: none; }
+.tags li { border: 0.3mm solid var(--line); border-radius: 99px; padding: 0.6mm 2.4mm; font-size: 8.4pt; color: var(--ink-2); }
+.project { background: var(--accent-soft); border-radius: 2.5mm; padding: 3.2mm 4mm; break-inside: avoid; }
+.project h3 { font-size: 10.5pt; margin-bottom: 0.6mm; }
+.project h3 span { color: var(--muted); font-weight: 500; font-size: 9pt; }
+.project p { margin: 0 0 1mm; }
+.project .link { font-size: 8.6pt; color: var(--accent); font-weight: 600; }
+.approach { font-size: 9.2pt; }
+.approach b { color: var(--ink); }
+.foot { margin-top: 4mm; padding-top: 2.5mm; border-top: 0.3mm solid var(--line); font-size: 8pt; color: var(--muted); display: flex; justify-content: space-between; }
+</style>
+</head>
+<body>
+<div class="page">
+
+<header class="head">
+	<img src="../assets/img/george.jpg" alt="">
+	<div>
+		<h1>George Stathopoulos</h1>
+		<div class="title">Customer Experience &amp; Quality Lead</div>
+		<div class="contact">
+			<span>Athens, Greece</span>
+			<span><a href="mailto:mindanticipation@gmail.com"><b>mindanticipation@gmail.com</b></a></span>
+			<span><a href="https://www.linkedin.com/in/georgstathopoulos/">linkedin.com/in/georgstathopoulos</a></span>
+			<span><a href="https://george-stathopoulos.github.io/">george-stathopoulos.github.io</a></span>
+		</div>
+	</div>
+</header>
+
+<section>
+	<h2>Profile</h2>
+	<p class="profile">Customer experience and support operations leader with 13+ years in SaaS and the WordPress ecosystem. Proven track record of improving customer experience, scaling support operations and driving measurable business outcomes. Specialised in support transformation: Zendesk migrations, AI-driven support optimisation, workflow automation and cross-functional service design, using AI to give teams more time for the conversations that need a person.</p>
+</section>
+
+<ul class="highlights">
+	<li><b>13+ years</b><span>in SaaS and support leadership</span></li>
+	<li><b>90% → 94%</b><span>CSAT at WP Media</span></li>
+	<li><b>~24h → hours</b><span>first response time</span></li>
+	<li><b>~30%</b><span>fewer Imagify tickets through AI automation</span></li>
+</ul>
+
+<section>
+	<h2>Experience</h2>
+
+	<div class="company">
+		<div class="company-head"><h3>WP Media <small>WP Rocket · Imagify · RocketCDN</small></h3><span class="dates">Mar 2023 – present</span></div>
+		<div class="role">
+			<div class="role-head"><h4>Customer Experience &amp; Quality Lead <span class="now">Current</span></h4><span class="dates">Jan 2026 – present</span></div>
+			<p>Promoted as the customer experience function evolved, expanding from support operations into end-to-end customer experience and quality strategy across WP Media products. Responsible for support operations, CX strategy, quality systems, workflow design, AI-driven support optimisation, reporting, and alignment with Product, Engineering and Marketing.</p>
+		</div>
+		<div class="role">
+			<div class="role-head"><h4>Head of Support</h4><span class="dates">Mar 2023 – Jan 2026</span></div>
+			<ul class="points">
+				<li>Led the migration from Help Scout (8 mailboxes) to Zendesk, building a scalable support operations system across multiple products and teams.</li>
+				<li>Reduced first response time from ~24 hours to a few hours through workflow redesign, prioritisation logic and operational improvements.</li>
+				<li>Increased CSAT from 90% to 94% through structured quality programmes and support process improvements.</li>
+				<li>Reduced Imagify ticket volume by ~30% through AI-powered automation and improved self-service flows.</li>
+				<li>Designed and implemented 100+ standardised support workflows, improving consistency and efficiency across teams.</li>
+				<li>Established structured escalation processes across Support, Product and Engineering, improving resolution speed and alignment.</li>
+				<li>Introduced support tiering frameworks that reduced unnecessary escalations and improved operational clarity.</li>
+				<li>Built RocketCare, a premium installation and onboarding service, improving onboarding and support monetisation.</li>
+				<li>Led and developed a team of ~18 support professionals through operational leadership, coaching frameworks and quality systems.</li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="company">
+		<div class="company-head"><h3>WPMU DEV</h3><span class="dates">Jun 2013 – Mar 2023</span></div>
+		<div class="role">
+			<div class="role-head"><h4>Head of Sales &amp; Accounts</h4><span class="dates">Jul 2017 – Mar 2023</span></div>
+			<ul class="points">
+				<li>Led global accounts and customer operations across a distributed SaaS organisation.</li>
+				<li>Owned onboarding, retention, account management and customer success workflows across key segments.</li>
+				<li>Improved operational scalability by designing reporting systems and customer lifecycle processes.</li>
+			</ul>
+		</div>
+		<div class="role">
+			<div class="role-head"><h4>Support Team Lead</h4><span class="dates">May 2015 – Jul 2017</span></div>
+			<ul class="points">
+				<li>Led a support team responsible for customer issue resolution, onboarding and product guidance.</li>
+				<li>Implemented coaching, training and performance frameworks to improve team consistency and output quality.</li>
+			</ul>
+		</div>
+		<div class="role">
+			<div class="role-head"><h4>Accounts Support Specialist</h4><span class="dates">Jun 2013 – May 2015</span></div>
+			<ul class="points">
+				<li>Managed customer accounts, billing issues and retention-related enquiries.</li>
+				<li>Supported customer onboarding and account lifecycle processes.</li>
+			</ul>
+		</div>
+	</div>
+</section>
+
+<div class="cols">
+	<div>
+		<section>
+			<h2>Core competencies</h2>
+			<ul class="tags">
+				<li>Customer experience strategy</li><li>Support operations leadership</li><li>AI-powered support automation</li><li>Process &amp; workflow design</li><li>Knowledge management</li><li>Service design</li><li>Customer journey optimisation</li><li>Escalation management</li><li>Cross-functional leadership</li><li>Documentation strategy</li><li>Quality governance</li>
+			</ul>
+		</section>
+		<section>
+			<h2>Tools &amp; platforms</h2>
+			<ul class="tags">
+				<li>Zendesk</li><li>Help Scout</li><li>Metabase</li><li>Looker Studio</li><li>Jira</li><li>Asana</li><li>Trello</li><li>Mixpanel</li><li>Stripe</li><li>Hubstaff</li><li>Google Workspace</li><li>AI support tools</li>
+			</ul>
+		</section>
+		<section>
+			<h2>Languages</h2>
+			<p>Greek (native) · English (professional)</p>
+		</section>
+	</div>
+	<div>
+		<section>
+			<h2>Selected project</h2>
+			<div class="project">
+				<h3>Gatehouse <span>· 2026</span></h3>
+				<p>WordPress plugin that tracks the cost of every AI call per plugin, enforces monthly budgets and removes personal data before it reaches AI providers. Free and open source, accessible (WCAG 2.2 AA) and GDPR-ready.</p>
+				<a class="link" href="https://george-stathopoulos.github.io/gatehouse/">george-stathopoulos.github.io/gatehouse</a>
+			</div>
+		</section>
+		<section class="approach">
+			<h2>Approach to AI</h2>
+			<p><b>People stay in charge.</b> I use AI to automate the repetitive, never the relationship, with privacy by default and results measured before they're trusted.</p>
+		</section>
+	</div>
+</div>
+
+<div class="foot"><span>George Stathopoulos · CV</span><span>george-stathopoulos.github.io</span></div>
+
+</div>
+</body>
+</html>
