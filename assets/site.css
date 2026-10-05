@@ -825,28 +825,32 @@ img {
 .project.featured {
 	grid-column: 1 / -1;
 	display: grid;
-	grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+	/* One project per row: a compact screenshot beside a wide description. */
+	grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
 }
 
 .project-shot {
+	position: relative;
 	background: linear-gradient(160deg, #3b2d91, #17123d);
-	padding: 32px 0 0 32px;
+	padding: 24px 0 0 24px;
 	overflow: hidden;
-	display: flex;
-	align-items: flex-end;
+	min-height: 260px;
 }
 
 .project-shot img {
+	position: absolute;
+	top: 24px;
+	left: 24px;
+	width: calc(100% - 24px);
+	height: calc(100% - 24px);
 	border-radius: 10px 0 0 0;
 	box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.6);
-	width: 100%;
-	aspect-ratio: 16 / 10;
 	object-fit: cover;
 	object-position: top left;
 }
 
 .project-body {
-	padding: 32px;
+	padding: 26px 30px;
 	display: flex;
 	flex-direction: column;
 }
@@ -871,27 +875,37 @@ img {
 }
 
 .project h3 {
-	font-size: 26px;
-	margin-bottom: 4px;
+	font-size: 23px;
+	margin-bottom: 2px;
 }
 
 .project .sub {
 	color: var(--accent);
 	font-weight: 600;
-	margin-bottom: 14px;
+	margin-bottom: 10px;
+}
+
+.project-body > p:not(.sub) {
+	font-size: 16px;
+	margin-bottom: 12px;
 }
 
 .project ul.points {
-	margin: 4px 0 22px;
+	margin: 0 0 16px;
 	padding: 0;
 	list-style: none;
+	/* Two columns of short points keep the card low. */
+	columns: 2;
+	column-gap: 28px;
 }
 
 .project ul.points li {
 	position: relative;
-	padding-left: 22px;
-	margin-bottom: 6px;
-	font-size: 15.5px;
+	padding-left: 18px;
+	margin-bottom: 5px;
+	font-size: 14.5px;
+	line-height: 1.45;
+	break-inside: avoid;
 }
 
 .project ul.points li::before {
@@ -907,7 +921,7 @@ img {
 }
 
 .project .tags {
-	margin-bottom: 24px;
+	margin-bottom: 16px;
 }
 
 .project .tags li {
@@ -918,6 +932,77 @@ img {
 
 .project .cta-row {
 	margin-top: auto;
+}
+
+/* Fixpass, lights out: dark card, white and yellow text, the hero's animation playing. */
+.project--lightsout {
+	background: #080808;
+	border-color: #232323;
+	color: #fff;
+}
+
+.project--lightsout .project-shot {
+	background: #080808;
+	padding: 0;
+}
+
+.project--lightsout .project-shot video {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: 60% 40%;
+}
+
+/* Blend the video into the text side. */
+.project--lightsout .project-shot::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(90deg, transparent 70%, #080808);
+	pointer-events: none;
+}
+
+.project--lightsout h3,
+.project--lightsout p,
+.project--lightsout ul.points li {
+	color: #fff;
+}
+
+.project--lightsout .sub {
+	color: #ffd43b;
+}
+
+.project--lightsout .project-meta {
+	color: rgba(255, 255, 255, 0.62);
+}
+
+.project--lightsout .status {
+	background: rgba(255, 212, 59, 0.14);
+	color: #ffd43b;
+}
+
+.project--lightsout ul.points li::before {
+	background: #ffd43b;
+	opacity: 1;
+}
+
+.project--lightsout .tags li {
+	background: rgba(255, 255, 255, 0.08);
+	border-color: rgba(255, 255, 255, 0.14);
+	color: #fff;
+}
+
+.project--lightsout .btn-primary {
+	background: #4a3aa7;
+	color: #fff;
+}
+
+.project--lightsout .btn-ghost {
+	background: transparent;
+	border-color: rgba(255, 255, 255, 0.4);
+	color: #fff;
 }
 
 .project.soon {
@@ -1128,11 +1213,24 @@ img {
 	}
 
 	.project-shot {
-		padding: 24px 0 0 24px;
+		min-height: 0;
+		aspect-ratio: 16 / 10;
+	}
+
+	.project--lightsout .project-shot {
+		aspect-ratio: 4 / 3;
+	}
+
+	.project--lightsout .project-shot::after {
+		background: linear-gradient(180deg, transparent 75%, #080808);
 	}
 
 	.project-body {
 		padding: 24px;
+	}
+
+	.project ul.points {
+		columns: 1;
 	}
 
 	.contact {

@@ -256,3 +256,45 @@
 	}
 	update();
 } )();
+
+/* Project videos: play only while on screen, and never for people who prefer reduced motion. */
+( function () {
+	'use strict';
+
+	var videos = document.querySelectorAll( 'video[data-autoplay]' );
+	if ( ! videos.length ) {
+		return;
+	}
+	var reduceMotion = window.matchMedia( '(prefers-reduced-motion: reduce)' );
+
+	videos.forEach( function ( video ) {
+		var visible = false;
+		function update() {
+			if ( visible && ! document.hidden && ! reduceMotion.matches ) {
+				video.preload = 'auto';
+				var playing = video.play();
+				if ( playing && playing.catch ) {
+					playing.catch( function () {} );
+				}
+			} else {
+				video.pause();
+			}
+		}
+		if ( 'IntersectionObserver' in window ) {
+			new IntersectionObserver(
+				function ( entries ) {
+					visible = entries[ 0 ].isIntersecting;
+					update();
+				},
+				{ rootMargin: '200px 0px' }
+			).observe( video );
+		} else {
+			visible = true;
+			update();
+		}
+		document.addEventListener( 'visibilitychange', update );
+		if ( reduceMotion.addEventListener ) {
+			reduceMotion.addEventListener( 'change', update );
+		}
+	} );
+} )();

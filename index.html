@@ -229,7 +229,8 @@
 		<div class="projects">
 			<!--
 				To add a project, copy one <article class="project"> block below.
-				Use class="project featured" for a wide card with a screenshot, or class="project" for a half-width card.
+				Use class="project featured" for a card with a screenshot (one per row), or class="project" for a half-width card.
+				Add "project--lightsout" for a dark card; a <video data-autoplay> plays while it's on screen.
 				Put its screenshot in assets/img/ (about 1400px wide).
 			-->
 			<article class="project featured reveal">
@@ -276,9 +277,9 @@
 					</div>
 				</div>
 			</article>
-			<article class="project featured reveal">
+			<article class="project featured project--lightsout reveal">
 				<div class="project-shot">
-					<img src="assets/img/project-fixpass.jpg" width="1400" height="875" alt="Fixpass: Stop guessing it. Spotlight it. A browser window with the broken button spotlighted and marked." loading="lazy" decoding="async">
+					<video src="assets/img/project-fixpass.mp4" poster="assets/img/project-fixpass-poster.jpg" width="640" height="640" muted loop playsinline preload="none" data-autoplay aria-label="The Fixpass website with the lights out: a flashlight beam moves over hand-drawn WordPress problems, and a neon fatal error runs away from the light."></video>
 				</div>
 				<div class="project-body">
 					<div class="project-meta"><span class="status">Live</span><span>2026 · WordPress plugin · Free and open source</span></div>
