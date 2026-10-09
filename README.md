@@ -10,8 +10,8 @@ George Stathopoulos's personal site. Live at https://george-stathopoulos.github.
 | `assets/site.css` | Design: colours, layout, light and dark mode (same style as the Gatehouse website) |
 | `assets/site.js` | Theme switch, mobile menu, gentle reveals and the smoke animation in the hero |
 | `assets/img/` | Portrait and project screenshots |
-| `cv/cv.html` | Source of the CV |
-| `george-stathopoulos-cv.pdf` | The downloadable CV, generated from `cv/cv.html` |
+| `george-stathopoulos-cv.pdf` | The downloadable CV (George's own latest PDF; replace this file to update it) |
+| `cv/cv.html` | An older HTML source of the CV; not used for the current PDF, so don't rebuild over it |
 
 ## Add a project
 
