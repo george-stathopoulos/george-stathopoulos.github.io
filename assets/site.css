@@ -1291,3 +1291,58 @@ h1, h2, h3 { letter-spacing: -0.03em; }
 }
 @media (max-width: 900px) { .hero { padding: 56px 0 48px; } .section { padding: 68px 0; } }
 @media (prefers-reduced-motion: reduce) { .aurora i { animation: none; } .term-body .caret { animation: none; } }
+
+/* ------------------------------------------------------------------ Lighter, brighter: a light hero, the terminal stays dark */
+
+:root {
+	--hero: linear-gradient(135deg, #4f46e5 0%, #7c5cf0 55%, #22b8e0 100%);
+	--hero-bg: linear-gradient(160deg, #f4f3ff 0%, #e9f6ff 52%, #fff1f8 100%);
+	--hero-ink: #12163a;
+	--hero-ink-2: #3d4470;
+	--hero-card: rgba(255, 255, 255, 0.72);
+	--hero-line: rgba(79, 70, 229, 0.16);
+	--hero-grid: rgba(79, 70, 229, 0.07);
+	--hero-btn-bg: #4f46e5;
+	--hero-btn-ink: #ffffff;
+	--hero-btn-line: rgba(18, 22, 58, 0.22);
+	--hero-btn-hover: rgba(79, 70, 229, 0.09);
+	--hero-grad: linear-gradient(90deg, #4f46e5, #0891b2 55%, #db2777);
+	--hero-blob: 0.38;
+}
+:root[data-theme="dark"] {
+	--hero: linear-gradient(160deg, #0f1642 0%, #0a0f26 55%, #050813 100%);
+	--hero-bg: #070b1c; --hero-ink: #ffffff; --hero-ink-2: rgba(255, 255, 255, 0.78); --hero-card: rgba(255, 255, 255, 0.04);
+	--hero-line: rgba(255, 255, 255, 0.1); --hero-grid: rgba(255, 255, 255, 0.045); --hero-btn-bg: #ffffff; --hero-btn-ink: #0a0f26;
+	--hero-btn-line: rgba(255, 255, 255, 0.35); --hero-btn-hover: rgba(255, 255, 255, 0.14);
+	--hero-grad: linear-gradient(90deg, #7c83ff, #22d3ee 55%, #f472b6); --hero-blob: 0.55;
+}
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme="light"]) {
+		--hero: linear-gradient(160deg, #0f1642 0%, #0a0f26 55%, #050813 100%);
+		--hero-bg: #070b1c; --hero-ink: #ffffff; --hero-ink-2: rgba(255, 255, 255, 0.78); --hero-card: rgba(255, 255, 255, 0.04);
+		--hero-line: rgba(255, 255, 255, 0.1); --hero-grid: rgba(255, 255, 255, 0.045); --hero-btn-bg: #ffffff; --hero-btn-ink: #0a0f26;
+		--hero-btn-line: rgba(255, 255, 255, 0.35); --hero-btn-hover: rgba(255, 255, 255, 0.14);
+		--hero-grad: linear-gradient(90deg, #7c83ff, #22d3ee 55%, #f472b6); --hero-blob: 0.55;
+	}
+}
+
+.hero { background: var(--hero-bg); color: var(--hero-ink-2); }
+.hero h1, .hero .role { color: var(--hero-ink); }
+.hero .lede, .hero .eyebrow { color: var(--hero-ink-2); }
+.grad { background-image: var(--hero-grad); }
+.aurora::after { background-image: linear-gradient(var(--hero-grid) 1px, transparent 1px), linear-gradient(90deg, var(--hero-grid) 1px, transparent 1px); }
+.aurora i { opacity: var(--hero-blob); }
+.hero .btn-light { background: var(--hero-btn-bg); color: var(--hero-btn-ink); }
+.hero .btn-light:hover { color: var(--hero-btn-ink); }
+.hero .btn-outline-light { background: transparent; color: var(--hero-ink); border-color: var(--hero-btn-line); }
+.hero .btn-outline-light:hover { background: var(--hero-btn-hover); color: var(--hero-ink); }
+.hero .stats li { background: var(--hero-card); border-color: var(--hero-line); }
+.hero .stats b { background-image: var(--hero-grad); }
+.hero .stats span { color: var(--hero-ink-2); }
+.hero .portrait { border-color: #fff; }
+
+/* A brighter header and pull quote, a softer shadow on the cards */
+.pull { background: var(--hero); }
+.contact { background: var(--hero); }
+.term { box-shadow: 0 40px 80px -30px rgba(18, 22, 58, 0.55), 0 0 60px -22px rgba(79, 70, 229, 0.55); }
+.term { background: rgba(10, 14, 34, 0.96); }
