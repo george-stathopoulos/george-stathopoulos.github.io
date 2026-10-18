@@ -234,6 +234,19 @@
 		} );
 	}
 
+	/* Blog teaser: one funny line at a time, typed out ------------------- */
+	var rot = document.querySelector( '.blog-band .rot' );
+	if ( rot && ! reduceMotion.matches ) {
+		var msgs = rot.querySelectorAll( 'span' );
+		var cur = 0;
+		setInterval( function () {
+			msgs[ cur ].classList.remove( 'on' );
+			cur = ( cur + 1 ) % msgs.length;
+			void rot.offsetWidth;
+			msgs[ cur ].classList.add( 'on' );
+		}, 4200 );
+	}
+
 	/* Project filter --------------------------------------------------- */
 	var filters = document.querySelectorAll( '.filter' );
 	if ( filters.length ) {

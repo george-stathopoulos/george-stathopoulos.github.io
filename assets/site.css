@@ -1376,3 +1376,78 @@ h1, h2, h3 { letter-spacing: -0.03em; }
 	.site-foot { padding-top: 64px; }
 	.foot-grid { grid-template-columns: 1fr; }
 }
+
+/* ------------------------------------------------------------------ Blog teaser: the blog's own black-and-amber CRT */
+
+.blog-band { --amber: #ffb000; --yellow: #ffd36b; --crt-bg: #0b0a08;
+	position: relative; display: block; overflow: hidden; isolation: isolate; margin-top: 40px; border-radius: 22px; padding: 26px 30px 0;
+	background: radial-gradient(120% 140% at 50% 0%, #1a1405 0%, var(--crt-bg) 60%); color: var(--yellow); text-decoration: none;
+	border: 2px solid var(--amber); box-shadow: 0 0 0 1px #3a2d10, 0 0 30px rgba(255, 176, 0, 0.28), inset 0 0 60px rgba(255, 176, 0, 0.07);
+	font-family: ui-monospace, "SF Mono", "IBM Plex Mono", Menlo, Consolas, monospace; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+.blog-band:hover { color: var(--yellow); transform: translateY(-3px); box-shadow: 0 0 0 1px #3a2d10, 0 0 46px rgba(255, 176, 0, 0.5), inset 0 0 70px rgba(255, 176, 0, 0.1); }
+.blog-band > span { display: block; }
+.crt { position: absolute; inset: 0; z-index: 2; pointer-events: none; border-radius: inherit;
+	background: repeating-linear-gradient(180deg, rgba(0, 0, 0, 0.28) 0 1px, transparent 1px 3px), radial-gradient(120% 100% at 50% 50%, transparent 60%, rgba(0, 0, 0, 0.5)); animation: flicker 5s infinite; }
+@keyframes flicker { 0%, 100% { opacity: 0.95; } 47% { opacity: 1; } 48% { opacity: 0.8; } 50% { opacity: 1; } 78% { opacity: 0.9; } }
+.blog-top { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: 13px; color: #9a7424; margin-bottom: 18px; }
+.blog-tag { color: var(--amber); text-shadow: 0 0 8px rgba(255, 176, 0, 0.6); }
+.dots { display: inline-block; width: 1.4em; text-align: left; animation: dots 1.4s steps(4) infinite; overflow: hidden; vertical-align: bottom; }
+@keyframes dots { from { width: 0; } to { width: 1.4em; } }
+.blog-main { display: grid !important; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 32px; align-items: center; }
+.blog-copy { display: block; }
+.blog-h { display: block; font-size: clamp(30px, 4.4vw, 52px); line-height: 1.05; font-weight: 800; letter-spacing: -0.02em; color: var(--amber); text-shadow: 0 0 10px rgba(255, 176, 0, 0.65), 0 0 28px rgba(255, 176, 0, 0.3); margin-bottom: 12px; }
+.blog-sub { display: block; font-size: clamp(16px, 1.8vw, 20px); color: #f2d49a; margin-bottom: 18px; }
+.blog-sub em { color: var(--yellow); font-style: normal; background: rgba(255, 211, 107, 0.14); padding: 0 6px; border-radius: 4px; }
+.blog-say { display: flex; align-items: center; gap: 8px; min-height: 28px; font-size: 14px; color: #c9a14a; }
+.blog-say b { color: var(--amber); }
+.rot { position: relative; display: inline-block; min-width: 4ch; }
+.rot span { display: none; white-space: nowrap; overflow: hidden; width: calc(var(--n) * 1ch); }
+.rot span.on { display: inline-block; animation: type 1.8s steps(var(--n)) both; }
+@keyframes type { from { width: 0; } to { width: calc(var(--n) * 1ch); } }
+.cur { display: inline-block; width: 9px; height: 1.1em; background: var(--amber); box-shadow: 0 0 8px var(--amber); animation: blink 1s steps(2) infinite; }
+
+.blog-go { display: flex !important; flex-direction: column; align-items: stretch; gap: 12px; text-align: center; }
+.start { font-size: 15px; letter-spacing: 0.3em; color: var(--amber); animation: blink 1.1s steps(2) infinite; text-shadow: 0 0 8px rgba(255, 176, 0, 0.7); }
+.press { display: block; padding: 16px 18px; font-size: clamp(16px, 1.9vw, 21px); font-weight: 800; letter-spacing: 0.06em; color: #0b0a08; background: var(--amber); border-radius: 6px;
+	box-shadow: 0 6px 0 #8a5d00, 0 0 24px rgba(255, 176, 0, 0.55); transition: transform 0.12s ease, box-shadow 0.12s ease; }
+.press b { display: inline-block; margin-left: 6px; animation: nudge 0.9s ease-in-out infinite; }
+@keyframes nudge { 50% { transform: translateX(6px); } }
+.blog-band:hover .press { transform: translateY(3px); box-shadow: 0 3px 0 #8a5d00, 0 0 34px rgba(255, 176, 0, 0.8); animation: wobble 0.5s ease 1; }
+@keyframes wobble { 25% { rotate: -1.2deg; } 75% { rotate: 1.2deg; } }
+.load { display: block; position: relative; height: 22px; border: 1px solid #6b4f12; border-radius: 3px; overflow: hidden; background: #120e04; }
+.load i { position: absolute; inset: 0 auto 0 0; width: 0; background: repeating-linear-gradient(90deg, var(--amber) 0 8px, #8a5d00 8px 10px); animation: fill 4s ease-out infinite; }
+.load small { position: absolute; inset: 0; display: grid; place-items: center; font-size: 11.5px; font-weight: 700; color: #0b0a08; background: none; letter-spacing: 0.06em; text-shadow: 0 0 3px rgba(255, 211, 107, 0.9); }
+@keyframes fill { 0% { width: 0; } 70% { width: 99%; } 100% { width: 99%; } }
+
+.blog-ticker { display: block; margin: 26px -30px 0; border-top: 1px solid #3a2d10; background: #120e04; overflow: hidden; white-space: nowrap; }
+.blog-ticker .track { display: inline-flex; gap: 0; padding: 11px 0; animation: marquee 60s linear infinite; font-size: 13.5px; color: #c9a14a; }
+.blog-ticker .track span { display: inline-block; padding: 0 22px; }
+.blog-ticker .track span::before { content: "\25cf"; margin-right: 22px; color: var(--amber); }
+.blog-band:hover .track { animation-play-state: paused; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+@media (max-width: 800px) {
+	.blog-band { padding: 22px 20px 0; }
+	.blog-main { grid-template-columns: 1fr; gap: 22px; }
+	.blog-ticker { margin: 22px -20px 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+	.crt, .dots, .start, .cur, .press b, .load i, .blog-ticker .track, .rot span.on { animation: none; }
+	.load i { width: 99%; }
+	.blog-ticker { white-space: normal; }
+	.blog-ticker .track { display: block; padding: 11px 16px; transform: none; }
+	.blog-ticker .track span:nth-child(n+8) { display: none; }
+	.blog-band:hover { transform: none; }
+}
+
+.blog-band .blog-top { display: flex; }
+.blog-main, .blog-copy, .blog-go { min-width: 0; }
+.blog-band { max-width: 100%; }
+@keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
+@media (max-width: 800px) {
+	.blog-main { grid-template-columns: minmax(0, 1fr); }
+	.blog-say { align-items: flex-start; }
+	.rot span { white-space: normal; width: auto; }
+	.rot span.on { display: inline; animation: fadein 0.6s ease both; }
+	.rot { min-width: 0; }
+}
