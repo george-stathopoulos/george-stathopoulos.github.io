@@ -107,6 +107,133 @@
 		} );
 	}
 
+	/* Hero terminal: types a short story about what I do ---------------- */
+	var term = document.getElementById( 'term' );
+	if ( term ) {
+		var script = [
+			[ [ 'p', '$ ' ], [ 'c', 'whoami' ] ],
+			[ [ 'o', 'george — customer experience & quality lead' ] ],
+			[],
+			[ [ 'p', '$ ' ], [ 'c', 'cat focus.txt' ] ],
+			[ [ 'k', '→ ' ], [ 'o', 'support operations that scale' ] ],
+			[ [ 'k', '→ ' ], [ 'o', 'AI workflows, with people in charge' ] ],
+			[ [ 'k', '→ ' ], [ 'o', 'small tools that fix real problems' ] ],
+			[],
+			[ [ 'p', '$ ' ], [ 'c', 'ls ~/projects' ] ],
+			[ [ 'o', 'expenity  gatehouse  helpdesk-hero' ] ],
+			[ [ 'o', 'fixpass   fixpin     sheetpilot' ] ],
+			[],
+			[ [ 'p', '$ ' ], [ 'c', './ship --next' ] ],
+			[ [ 'ok', '✔ ' ], [ 'o', 'built with care, shipped for people' ] ],
+		];
+		var caret = document.createElement( 'span' );
+		caret.className = 'caret';
+		var timers = [];
+		var later = function ( fn, ms ) {
+			timers.push( setTimeout( fn, ms ) );
+		};
+		var draw = function ( instant ) {
+			term.textContent = '';
+			var li = 0;
+			var si = 0;
+			var ci = 0;
+			var line;
+			var span;
+			var next = function () {
+				if ( li >= script.length ) {
+					return;
+				}
+				var seg = script[ li ][ si ];
+				if ( ! line ) {
+					line = document.createElement( 'span' );
+					line.className = 'l';
+					term.appendChild( line );
+				}
+				if ( ! seg ) {
+					li++;
+					si = 0;
+					ci = 0;
+					line = null;
+					span = null;
+					if ( li >= script.length ) {
+						line = term.lastChild;
+						line.appendChild( caret );
+						if ( ! instant ) {
+							later( function () { draw( false ); }, 6000 );
+						}
+						return;
+					}
+					later( next, instant ? 0 : 380 );
+					return;
+				}
+				if ( ! span ) {
+					span = document.createElement( 'span' );
+					span.className = seg[ 0 ];
+					line.appendChild( span );
+				}
+				if ( ci < seg[ 1 ].length ) {
+					span.textContent += seg[ 1 ].charAt( ci++ );
+					line.appendChild( caret );
+					later( next, instant ? 0 : ( seg[ 0 ] === 'c' ? 70 : 22 ) );
+				} else {
+					si++;
+					ci = 0;
+					span = null;
+					next();
+				}
+			};
+			if ( script[ 0 ].length === 0 ) {
+				li = 1;
+			}
+			next();
+		};
+		if ( reduceMotion.matches ) {
+			// Everything at once, no typing, no loop.
+			script.forEach( function ( parts ) {
+				var l = document.createElement( 'span' );
+				l.className = 'l';
+				parts.forEach( function ( p ) {
+					var sp = document.createElement( 'span' );
+					sp.className = p[ 0 ];
+					sp.textContent = p[ 1 ];
+					l.appendChild( sp );
+				} );
+				term.appendChild( l );
+			} );
+		} else {
+			draw( false );
+		}
+	}
+
+	/* Count the highlights up once ------------------------------------- */
+	var counters = document.querySelectorAll( '[data-count]' );
+	if ( counters.length && 'IntersectionObserver' in window && ! reduceMotion.matches ) {
+		var co = new IntersectionObserver( function ( entries ) {
+			entries.forEach( function ( e ) {
+				if ( ! e.isIntersecting ) {
+					return;
+				}
+				var el = e.target;
+				var to = Number( el.dataset.count );
+				var pre = el.dataset.prefix || '';
+				var suf = el.dataset.suffix || '';
+				var t0 = performance.now();
+				var step = function ( t ) {
+					var k = Math.min( 1, ( t - t0 ) / 1100 );
+					el.textContent = pre + Math.round( to * ( 1 - Math.pow( 1 - k, 3 ) ) ) + suf;
+					if ( k < 1 ) {
+						requestAnimationFrame( step );
+					}
+				};
+				requestAnimationFrame( step );
+				co.unobserve( el );
+			} );
+		} );
+		counters.forEach( function ( el ) {
+			co.observe( el );
+		} );
+	}
+
 	/* Project filter --------------------------------------------------- */
 	var filters = document.querySelectorAll( '.filter' );
 	if ( filters.length ) {
