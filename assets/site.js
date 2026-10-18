@@ -107,6 +107,30 @@
 		} );
 	}
 
+	/* Project filter --------------------------------------------------- */
+	var filters = document.querySelectorAll( '.filter' );
+	if ( filters.length ) {
+		filters.forEach( function ( btn ) {
+			btn.addEventListener( 'click', function () {
+				var want = btn.dataset.filter;
+				filters.forEach( function ( b ) {
+					b.setAttribute( 'aria-pressed', b === btn ? 'true' : 'false' );
+				} );
+				document.querySelectorAll( '#project-grid .project' ).forEach( function ( card ) {
+					var cat = card.dataset.cat;
+					card.hidden = want !== 'all' && cat !== want && cat !== 'more';
+					if ( ! card.hidden ) {
+						card.classList.add( 'in' );
+					}
+				} );
+				// The wide card only leads the "All" view; with a filter every card is equal.
+				document.querySelectorAll( '#project-grid .project.feature' ).forEach( function ( c ) {
+					c.classList.toggle( 'feature-off', want !== 'all' );
+				} );
+			} );
+		} );
+	}
+
 	/* Hero smoke ------------------------------------------------------- */
 	// Soft, slow wisps drifting upward. Drawn small and stretched (smoke is blurry anyway),
 	// paused when the hero is off screen or the tab is hidden, and a single still frame
